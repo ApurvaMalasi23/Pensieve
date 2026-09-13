@@ -1,0 +1,6 @@
+filename,doc_id,company,fiscal_year,pages,tables,tables_flagged,status,error
+TEST DOC - 1.pdf,f342d7a37f896ce5,Republic Bancorp,2024,191,204,67,success (needs_review),
+TEST DOC - 2.pdf,34594a7641602ff9,LUX INDUSTRIES LIMITED,2025-26,37,83,26,success,
+TEST DOC - 3.pdf,bf4118a151f4c883,NTPC Green Energy Limited,2024,11,7,3,success,
+TEST DOC - 4.pdf,b8d1e57741b9198f,Jubilant FoodWorks Limited,FY 2025-26,165,465,190,success,
+TEST DOC - 5.pdf,0f79f9f01d90739e,Ravindra Energy Limited,2024-25,173,134,73,success,

@@ -1,0 +1,194 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+  /* Palette 2: Natural Titanium & Hermès Amber */
+  --surface-base: #0A0B0E;
+  --surface-raised: #13161F;
+  --surface-elevated: #181C28;
+  --surface-overlay: rgba(10, 11, 14, 0.88);
+  
+  --ink: #F1F3F9;
+  --ink-secondary: #C2C7D4;
+  --muted: #8C93A5;
+  --muted-dark: #585E70;
+
+  --hairline: rgba(255, 255, 255, 0.06);
+  --hairline-subtle: rgba(255, 255, 255, 0.035);
+  --hairline-strong: rgba(255, 255, 255, 0.12);
+
+  /* Hermès Amber / Saffron Accent */
+  --accent: #E59500;
+  --accent-hover: #F3A712;
+  --accent-muted: #AD7000;
+  --accent-subtle: rgba(229, 149, 0, 0.12);
+  --accent-border: rgba(229, 149, 0, 0.28);
+
+  /* Verification Semantic Colors: Tourmaline Emerald */
+  --verified-ink: #10B981;
+  --verified-bg: rgba(16, 185, 129, 0.08);
+  --verified-border: rgba(16, 185, 129, 0.22);
+
+  --caution-ink: #F59E0B;
+  --caution-bg: rgba(245, 158, 11, 0.08);
+  --caution-border: rgba(245, 158, 11, 0.22);
+
+  --unverified-ink: #EF4444;
+  --unverified-bg: rgba(239, 68, 68, 0.08);
+  --unverified-border: rgba(239, 68, 68, 0.22);
+}
+
+body {
+  background-color: var(--surface-base);
+  color: var(--ink);
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.011em;
+}
+
+/* Precision Tech Font System */
+.font-sans {
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.font-mono {
+  font-family: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+}
+
+/* Tabular lining figures & financial data in JetBrains Mono */
+.numeral,
+.tabular-nums,
+table,
+td,
+th,
+code,
+pre,
+kbd {
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: -0.02em;
+}
+
+/* Focus outline system: refined brass focus ring for interactive buttons/links only */
+button:focus-visible,
+a:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 1px;
+}
+
+input,
+textarea,
+input:focus,
+input:focus-visible,
+textarea:focus,
+textarea:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Rich black materials (elevation by lightening, not drop-shadow) */
+.rich-panel {
+  background-color: var(--surface-raised);
+  border-color: var(--hairline);
+}
+
+.rich-elevated {
+  background-color: var(--surface-elevated);
+  border-color: var(--hairline-strong);
+}
+
+.rich-glass-header {
+  background: rgba(11, 11, 14, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.rich-modal {
+  background-color: var(--surface-elevated);
+  border: 1px solid var(--hairline-strong);
+  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.6);
+}
+
+/* Signature Motion Moment: The Calm Verification & Answer Settle */
+@keyframes verification-settle {
+  0% {
+    opacity: 0;
+    transform: translateY(6px) scale(0.995);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-settle {
+  animation: verification-settle 380ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Skeleton shimmer in surface-raised tone */
+@keyframes rich-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+.animate-skeleton {
+  animation: rich-pulse 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-settle {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .animate-skeleton {
+    animation: none;
+    opacity: 0.7;
+  }
+}
+
+/* ==========================================================================
+   Luxury Minimalist Scrollbar System (Rich Black / Dark Glass)
+   Eliminates bright browser scrollbars across Chrome, Edge, Safari & Firefox
+   ========================================================================== */
+
+/* Standard Firefox & Modern CSS */
+html, body, div, aside, main {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.16) transparent;
+}
+
+/* WebKit / Chromium Browsers */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.13);
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  transition: background-color 0.25s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(229, 149, 0, 0.45); /* Hermès Amber glow on hover */
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: rgba(229, 149, 0, 0.65);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
