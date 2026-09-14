@@ -16,6 +16,7 @@ build/
 # --- Pensieve runtime outputs (populated at run time, not committed) ---
 output/
 *.log
+manifest*.csv
 
 # --- Tools ---
 .venv/
