@@ -37,26 +37,16 @@ log = get_logger(__name__)
 # Import the label enum from docling.  We do this here rather than at
 # the top of the module so that import errors surface with a clear message
 # rather than at package import time when docling might not yet be installed.
-try:
-    from docling.datamodel.document import DocItemLabel  # type: ignore[attr-defined]
-    _LABEL_TO_HINT: dict[str, str] = {
-        DocItemLabel.SECTION_HEADER.value: "heading",
-        DocItemLabel.FOOTNOTE.value: "footnote",
-        DocItemLabel.TEXT.value: "narrative",
-        DocItemLabel.LIST_ITEM.value: "narrative",
-        DocItemLabel.CODE.value: "narrative",
-        DocItemLabel.FORMULA.value: "narrative",
-    }
-except (ImportError, AttributeError):
-    # Fallback: use raw string values known from Docling v2 schema.
-    _LABEL_TO_HINT = {
-        "section_header": "heading",
-        "footnote": "footnote",
-        "text": "narrative",
-        "list_item": "narrative",
-        "code": "narrative",
-        "formula": "narrative",
-    }
+# Section hint mapping using raw string values known from Docling v2 schema.
+# Kept pure string-based to avoid importing Docling/PyTorch (~250MB) at startup.
+_LABEL_TO_HINT: dict[str, str] = {
+    "section_header": "heading",
+    "footnote": "footnote",
+    "text": "narrative",
+    "list_item": "narrative",
+    "code": "narrative",
+    "formula": "narrative",
+}
 
 # ---------------------------------------------------------------------------
 # Helpers

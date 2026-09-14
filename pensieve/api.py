@@ -38,7 +38,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from pensieve.classifier import classify_intent
-from pensieve.chunker import chunk_document
 from pensieve.config import (
     DEFAULT_OUTPUT_DIR,
     EMBEDDING_PROVIDER,
@@ -56,10 +55,8 @@ from pensieve.comparator import (
     detect_comparison_intent,
     execute_comparison,
 )
-from pensieve.embedder import embed_texts, get_vector_dim
 from pensieve.generator import generate_answer, parse_citations
 from pensieve.logger import get_logger
-from pensieve.metadata_extractor import extract_document_metadata
 from pensieve.numeric_grounding import (
     VerificationResult,
     extract_numbers_from_text,
@@ -68,8 +65,7 @@ from pensieve.numeric_grounding import (
     verify_numbers_against_grid,
 )
 from pensieve.retriever import retrieve_narrative_chunks, retrieve_table_chunks
-from pensieve.structurer import build_document_json
-from pensieve.vector_store import ensure_collection, get_client, upsert_chunks
+from pensieve.vector_store import ensure_collection, get_client
 from qdrant_client.http import models as qmodels
 
 log = get_logger(__name__)
@@ -336,6 +332,12 @@ def _run_ingestion_job(job_id: str, file_path: Path, filename: str) -> None:
                 _jobs[job_id]["progress_message"] = "Conversion failed."
             return
 
+        from pensieve.metadata_extractor import extract_document_metadata
+        from pensieve.structurer import build_document_json
+        from pensieve.chunker import chunk_document
+        from pensieve.embedder import embed_texts, get_vector_dim
+        from pensieve.vector_store import upsert_chunks
+
         with _jobs_lock:
             _jobs[job_id]["progress_message"] = "Extracting document metadata..."
 
@@ -422,7 +424,7 @@ def health_check() -> HealthResponse:
 
         if QDRANT_COLLECTION not in existing:
             return HealthResponse(
-                status="ok",
+                status="degraded",
                 qdrant_connected=True,
                 collection=QDRANT_COLLECTION,
                 points_count=0,
