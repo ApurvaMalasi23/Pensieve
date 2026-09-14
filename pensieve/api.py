@@ -15,6 +15,7 @@ from __future__ import annotations
 import argparse
 from collections import defaultdict
 import json
+import os
 from pathlib import Path
 import shutil
 import sys
@@ -55,7 +56,6 @@ from pensieve.comparator import (
     detect_comparison_intent,
     execute_comparison,
 )
-from pensieve.converter import convert_document
 from pensieve.embedder import embed_texts, get_vector_dim
 from pensieve.generator import generate_answer, parse_citations
 from pensieve.logger import get_logger
@@ -324,7 +324,9 @@ def _run_ingestion_job(job_id: str, file_path: Path, filename: str) -> None:
             _jobs[job_id]["status"] = "processing"
             _jobs[job_id]["progress_message"] = "Converting PDF document with Docling..."
 
-        # Phase 1: Convert document
+        # Phase 1: Convert document (lazy-loaded so API server starts instantly)
+        from pensieve.converter import convert_document
+
         result = convert_document(file_path)
         if result is None:
             log.error("[Job %s] Conversion failed for %s", job_id, filename)
@@ -958,9 +960,10 @@ def ask_endpoint(req: AskRequest, request: Request) -> AskResponse:
 
 def main() -> None:
     """CLI entry point to launch the Pensieve FastAPI server."""
+    env_port = int(os.environ.get("PORT", "8000"))
     parser = argparse.ArgumentParser(description="Pensieve API Server")
     parser.add_argument("--host", default="0.0.0.0", help="Host interface to bind (default: 0.0.0.0)")
-    parser.add_argument("--port", type=int, default=8000, help="Port to listen on (default: 8000)")
+    parser.add_argument("--port", type=int, default=env_port, help=f"Port to listen on (default: {env_port})")
     parser.add_argument("--reload", action="store_true", help="Enable auto-reload for development")
     args = parser.parse_args()
 
