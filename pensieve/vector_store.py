@@ -40,12 +40,12 @@ log = get_logger(__name__)
 _client: QdrantClient | None = None  # module-level singleton
 
 
-def get_client() -> QdrantClient:
+def get_client(refresh: bool = False) -> QdrantClient:
     """Return a (cached) Qdrant client connected to QDRANT_URL."""
     global _client  # noqa: PLW0603
-    if _client is None:
+    if _client is None or refresh:
         log.info("Connecting to Qdrant at %s", QDRANT_URL)
-        kwargs: dict = {"url": QDRANT_URL}
+        kwargs: dict = {"url": QDRANT_URL, "timeout": 120.0}
         if QDRANT_API_KEY:
             kwargs["api_key"] = QDRANT_API_KEY
         _client = QdrantClient(**kwargs, check_compatibility=False)
@@ -84,13 +84,19 @@ def ensure_collection(
         collection already exists — raises ValueError on mismatch.
     collection:
         Collection name. Defaults to QDRANT_COLLECTION config constant.
-
-    Raises
-    ------
-    ValueError
-        If the collection exists but its vector dimension doesn't match vector_dim.
     """
-    existing = {c.name for c in client.get_collections().collections}
+    existing = set()
+    import time
+    for attempt in range(1, 4):
+        try:
+            existing = {c.name for c in client.get_collections().collections}
+            break
+        except Exception as exc:
+            if attempt == 3:
+                log.error("Failed to connect to Qdrant after 3 attempts: %s", exc)
+                raise
+            log.warning("Connecting to Qdrant attempt %d failed (%s). Retrying in 3s...", attempt, exc)
+            time.sleep(3.0)
 
     if collection not in existing:
         log.info(
@@ -105,7 +111,15 @@ def ensure_collection(
         )
     else:
         # Verify dimension matches.
-        info = client.get_collection(collection_name=collection)
+        info = None
+        for attempt in range(1, 4):
+            try:
+                info = client.get_collection(collection_name=collection)
+                break
+            except Exception as exc:
+                if attempt == 3:
+                    raise
+                time.sleep(2.0)
         existing_dim = info.config.params.vectors.size
         if existing_dim != vector_dim:
             raise ValueError(
@@ -151,32 +165,28 @@ def _chunk_id_to_point_id(chunk_id: str) -> int:
 # Upsert
 # ---------------------------------------------------------------------------
 
+# Batch size for upserting points to Qdrant. Smaller batches prevent HTTP write timeouts.
+UPSERT_BATCH_SIZE: int = 32
+
+
 def upsert_chunks(
     client: QdrantClient,
     chunks: list["Chunk"],
     vectors: list[list[float]],
     collection: str = QDRANT_COLLECTION,
 ) -> None:
-    """Upsert chunk embeddings + payloads into the Qdrant collection.
+    """Upsert chunk points (vectors + metadata payloads) into Qdrant."""
+    if not chunks:
+        log.warning("upsert_chunks called with empty chunk list — nothing to do.")
+        return
 
-    Parameters
-    ----------
-    client:
-        Connected QdrantClient.
-    chunks:
-        List of Chunk dataclass instances (same order as vectors).
-    vectors:
-        List of embedding vectors, one per chunk.
-    collection:
-        Collection name. Defaults to QDRANT_COLLECTION.
-    """
     if len(chunks) != len(vectors):
         raise ValueError(
-            f"chunks ({len(chunks)}) and vectors ({len(vectors)}) must have the same length."
+            f"Chunk count ({len(chunks)}) does not match vector count ({len(vectors)})."
         )
 
     points: list[qmodels.PointStruct] = []
-    for chunk, vector in zip(chunks, vectors):
+    for chunk, vector in zip(chunks, vectors, strict=True):
         payload = {
             "chunk_id":               chunk.chunk_id,
             "doc_id":                 chunk.doc_id,
@@ -204,14 +214,25 @@ def upsert_chunks(
             )
         )
 
-    # Upsert in batches.
+    # Upsert in small batches with retry to prevent network timeouts to Qdrant Cloud
     total = len(points)
-    for i in range(0, total, EMBEDDING_BATCH_SIZE):
-        batch = points[i : i + EMBEDDING_BATCH_SIZE]
-        client.upsert(collection_name=collection, points=batch, wait=True)
-        log.debug("Upserted points %d-%d / %d", i + 1, min(i + EMBEDDING_BATCH_SIZE, total), total)
+    import time
+    for i in range(0, total, UPSERT_BATCH_SIZE):
+        batch = points[i : i + UPSERT_BATCH_SIZE]
+        max_attempts = 3
+        for attempt in range(1, max_attempts + 1):
+            try:
+                client.upsert(collection_name=collection, points=batch, wait=True)
+                break
+            except Exception as exc:
+                if attempt == max_attempts:
+                    log.error("Failed to upsert batch %d-%d after %d attempts: %s", i + 1, min(i + UPSERT_BATCH_SIZE, total), max_attempts, exc)
+                    raise
+                log.warning("Batch %d-%d upsert attempt %d failed (%s). Retrying in 2s...", i + 1, min(i + UPSERT_BATCH_SIZE, total), attempt, exc)
+                time.sleep(2.0)
+        log.info("Upserted points %d-%d / %d", i + 1, min(i + UPSERT_BATCH_SIZE, total), total)
 
-    log.info("Upserted %d point(s) into collection '%s'.", total, collection)
+    log.info("Successfully upserted %d point(s) into collection '%s'.", total, collection)
 
 
 # ---------------------------------------------------------------------------

@@ -173,7 +173,7 @@ def process_json(
 
     # --- Upsert ---
     try:
-        client = get_client()
+        client = get_client(refresh=True)
         upsert_chunks(client, chunks, vectors, collection=collection)
     except Exception as exc:  # noqa: BLE001
         log.error("%s — Qdrant upsert failed: %s", json_path.name, exc, exc_info=True)
