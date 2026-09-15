@@ -50,64 +50,64 @@ export const CitationChip: React.FC<CitationChipProps> = ({ citation, onClick })
         onFocus={() => setIsOpen(true)}
         onBlur={() => setIsOpen(false)}
         data-testid={`citation-chip-${citation.marker.replace(/[^a-zA-Z0-9]/g, "")}`}
-        className={`group inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs transition-all cursor-pointer select-none ${
+        className={`group inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs transition-all duration-200 cursor-pointer select-none shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] ${
           isFlagged
             ? "border-[#D4A373]/35 bg-[#D4A373]/10 text-[#D4A373] hover:bg-[#D4A373]/18"
             : isOpen
             ? "border-[#CBB282]/45 bg-[#17181D] text-[#F7F7F4] shadow-[0_0_16px_rgba(203,178,130,0.18)]"
-            : "border-white/8 bg-[#121216] text-[#F7F7F4] hover:bg-[#17181D] hover:border-white/16"
+            : "border-white/[0.07] bg-[#121216] text-[#F7F7F4] hover:bg-[#17181D] hover:border-[#CBB282]/35"
         }`}
         title="Hover for instant source excerpt or click to open full table modal"
       >
-        <span className="font-mono text-[#CBB282] font-semibold text-[11px]">{citation.marker}</span>
+        <span className="font-mono text-[#CBB282] font-semibold text-[10.5px] px-1.5 py-0.2 rounded-full bg-[#CBB282]/10 border border-[#CBB282]/20">
+          {citation.marker}
+        </span>
         <span className="font-normal text-[#F7F7F4] truncate max-w-[170px] text-[11.5px]">
           {citation.company_name || citation.source_filename.replace(/\.pdf$/i, "")}
         </span>
         {citation.fiscal_year && (
-          <span className="text-[10px] text-[#82807A] tabular-nums font-mono">{formatFiscalYear(citation.fiscal_year)}</span>
+          <span className="text-[9.5px] text-[#82807A] tabular-nums font-mono">{formatFiscalYear(citation.fiscal_year)}</span>
         )}
-        <span className="text-[10px] text-[#82807A] tabular-nums font-mono">p.{citation.page_start}</span>
+        <span className="text-[9.5px] text-[#82807A] tabular-nums font-mono">p.{citation.page_start}</span>
 
         {isFlagged ? (
-          <span className="inline-flex items-center gap-1 rounded bg-[#D4A373]/20 px-1 py-0.2 text-[10px] font-medium text-[#D4A373]">
+          <span className="inline-flex items-center gap-1 rounded-full bg-[#D4A373]/20 px-1.5 py-0.2 text-[9.5px] font-mono text-[#D4A373]">
             <ShieldAlert className="h-2.5 w-2.5 stroke-[1.8]" /> Flagged
           </span>
         ) : isTable ? (
-          <Table className="h-3 w-3 text-[#82807A] stroke-[1.5]" />
+          <Table className="h-3 w-3 text-[#82807A] stroke-[1.5] group-hover:text-[#CBB282] transition-colors" />
         ) : (
-          <FileText className="h-3 w-3 text-[#82807A] stroke-[1.5]" />
+          <FileText className="h-3 w-3 text-[#82807A] stroke-[1.5] group-hover:text-[#CBB282] transition-colors" />
         )}
       </button>
 
-      {/* Instant Provenance Popover (Rich Black elevation) */}
+      {/* Instant Provenance Popover (Archival Seal elevation) */}
       {isOpen && (
         <div
           role="tooltip"
-          className="absolute bottom-full left-0 mb-2 w-80 rounded-xl rich-modal p-3.5 shadow-2xl z-40 animate-settle pointer-events-none"
+          className="absolute bottom-full left-0 mb-2 w-84 rounded-2xl bg-[#121216] border border-white/[0.08] p-4 shadow-[0_24px_50px_rgba(0,0,0,0.9),inset_0_1px_0_rgba(255,255,255,0.06)] z-40 animate-settle pointer-events-none"
         >
-          <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center justify-between mb-2 pb-2 border-b border-white/[0.04]">
             <div className="flex items-center gap-2">
-              <span className="font-mono text-[#CBB282] font-bold text-xs">
+              <span className="font-mono text-[#CBB282] font-semibold text-[11px] px-1.5 py-0.5 rounded-full bg-[#CBB282]/10 border border-[#CBB282]/20">
                 {citation.marker}
               </span>
               <div>
-                <span className="font-medium text-xs text-[#F7F7F4] block leading-tight">
+                <span className="font-serif font-medium text-xs text-[#F7F7F4] block leading-tight">
                   {citation.company_name || citation.source_filename}
                 </span>
-                <div className="text-[10px] text-[#82807A] flex items-center gap-1.5 font-mono">
-                  <span>p.{citation.page_start}</span>
+                <div className="text-[9.5px] text-[#82807A] flex items-center gap-1.5 font-mono">
+                  <span>Page {citation.page_start}</span>
                   {citation.table_id && <span>• {citation.table_id}</span>}
                 </div>
               </div>
             </div>
-
-            {/* Type badge */}
             {isTable ? (
-              <span className="inline-flex items-center gap-1 rounded bg-[#CBB282]/10 border border-[#CBB282]/20 px-1.5 py-0.5 text-[10px] font-mono text-[#CBB282]">
+              <span className="inline-flex items-center gap-1 rounded-full bg-[#CBB282]/10 border border-[#CBB282]/20 px-2 py-0.5 text-[9.5px] font-mono text-[#CBB282]">
                 <Table className="h-2.5 w-2.5" /> Table
               </span>
             ) : (
-              <span className="inline-flex items-center gap-1 rounded bg-white/6 border border-white/6 px-1.5 py-0.5 text-[10px] font-mono text-[#82807A]">
+              <span className="inline-flex items-center gap-1 rounded-full bg-white/[0.04] border border-white/[0.05] px-2 py-0.5 text-[9.5px] font-mono text-[#82807A]">
                 <FileText className="h-2.5 w-2.5" /> Narrative
               </span>
             )}

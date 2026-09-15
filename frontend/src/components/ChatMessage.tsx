@@ -101,37 +101,17 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
                     ),
                     li: ({ children }) => <li className="leading-[1.68]">{children}</li>,
                     table: ({ children }) => (
-                      <div className="my-4 overflow-x-auto rounded-xl border border-white/[0.05] bg-[#0B0B0D] p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
-                        <table className="w-full border-collapse text-left text-xs tabular-nums font-mono">
+                      <div className="my-4 luxury-ledger-container">
+                        <table className="luxury-ledger">
                           {children}
                         </table>
                       </div>
                     ),
-                    thead: ({ children }) => (
-                      <thead className="border-b border-white/[0.06] bg-white/[0.015] text-[10px] font-mono tracking-wider uppercase text-[#CBB282]">
-                        {children}
-                      </thead>
-                    ),
-                    th: ({ children }) => (
-                      <th className="px-3.5 py-2 font-medium text-[#CBB282] border-r border-white/[0.04] last:border-0">
-                        {children}
-                      </th>
-                    ),
-                    tbody: ({ children }) => (
-                      <tbody className="divide-y divide-white/[0.035] font-mono text-xs tabular-nums">
-                        {children}
-                      </tbody>
-                    ),
-                    tr: ({ children }) => (
-                      <tr className="hover:bg-white/[0.02] transition-colors">
-                        {children}
-                      </tr>
-                    ),
-                    td: ({ children }) => (
-                      <td className="px-3.5 py-2 text-[#CDCBC4] font-mono text-xs tabular-nums border-r border-white/[0.035] last:border-0">
-                        {children}
-                      </td>
-                    ),
+                    thead: ({ children }) => <thead>{children}</thead>,
+                    th: ({ children }) => <th>{children}</th>,
+                    tbody: ({ children }) => <tbody>{children}</tbody>,
+                    tr: ({ children }) => <tr>{children}</tr>,
+                    td: ({ children }) => <td>{children}</td>,
                     code: ({ inline, children, ...props }: any) =>
                       inline ? (
                         <code

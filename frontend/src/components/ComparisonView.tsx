@@ -140,29 +140,17 @@ export const ComparisonView: React.FC<ComparisonViewProps> = ({
               ol: ({ children }) => <ol className="mb-2.5 list-decimal pl-5 space-y-1 text-[#CDCBC4]">{children}</ol>,
               li: ({ children }) => <li className="leading-relaxed">{children}</li>,
               table: ({ children }) => (
-                <div className="my-3 overflow-x-auto rounded-xl border border-white/[0.05] bg-[#0B0B0D] p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
-                  <table className="w-full border-collapse text-left text-xs tabular-nums font-mono">
+                <div className="my-3 luxury-ledger-container">
+                  <table className="luxury-ledger">
                     {children}
                   </table>
                 </div>
               ),
-              thead: ({ children }) => (
-                <thead className="border-b border-white/[0.06] bg-white/[0.015] text-[10px] font-mono tracking-wider uppercase text-[#CBB282]">
-                  {children}
-                </thead>
-              ),
-              th: ({ children }) => (
-                <th className="px-3 py-1.5 font-medium text-[#CBB282] border-r border-white/[0.04] last:border-0">{children}</th>
-              ),
-              tbody: ({ children }) => (
-                <tbody className="divide-y divide-white/[0.035] font-mono text-[11px]">{children}</tbody>
-              ),
-              tr: ({ children }) => (
-                <tr className="hover:bg-white/[0.025] transition-colors">{children}</tr>
-              ),
-              td: ({ children }) => (
-                <td className="px-3 py-1.5 text-[#CDCBC4] tabular-nums font-mono border-r border-white/[0.035] last:border-0">{children}</td>
-              ),
+              thead: ({ children }) => <thead>{children}</thead>,
+              th: ({ children }) => <th>{children}</th>,
+              tbody: ({ children }) => <tbody>{children}</tbody>,
+              tr: ({ children }) => <tr>{children}</tr>,
+              td: ({ children }) => <td>{children}</td>,
             }}
           >
             {response.answer}

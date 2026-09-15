@@ -116,31 +116,24 @@ export const CitationModal: React.FC<CitationModalProps> = ({ citation, onClose 
             </span>
           </div>
 
-          <div className="rounded-xl border border-white/[0.05] bg-[#121216] p-5 text-sm text-[#F7F7F4] overflow-x-auto shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
+          <div className="luxury-ledger-container p-1">
             {isTable ? (
-              <div className="prose prose-invert max-w-none text-xs text-[#F7F7F4]">
+              <div className="overflow-x-auto">
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   components={{
-                    table: ({ node, ...props }) => (
-                      <div className="overflow-x-auto my-1 rounded-lg border border-white/[0.06]">
-                        <table className="w-full text-left border-collapse text-xs tabular-nums" {...props} />
-                      </div>
+                    table: ({ children }) => (
+                      <table className="luxury-ledger">
+                        {children}
+                      </table>
                     ),
-                    thead: ({ node, ...props }) => (
-                      <thead className="bg-[#17181D] text-[#CBB282] font-mono uppercase tracking-wider text-[10px] border-b border-white/[0.06]" {...props} />
-                    ),
-                    th: ({ node, ...props }) => (
-                      <th className="px-3 py-2 border-r border-white/[0.04] last:border-0 font-medium text-[#CBB282]" {...props} />
-                    ),
-                    td: ({ node, ...props }) => (
-                      <td className="px-3 py-2 border-t border-r border-white/[0.035] last:border-r-0 text-[11px] text-[#CDCBC4] tabular-nums font-mono" {...props} />
-                    ),
-                    tr: ({ node, ...props }) => (
-                      <tr className="hover:bg-white/[0.025] even:bg-white/[0.015] transition-colors" {...props} />
-                    ),
-                    p: ({ node, ...props }) => (
-                      <p className="mb-2 text-[#82807A] leading-relaxed text-xs" {...props} />
+                    thead: ({ children }) => <thead>{children}</thead>,
+                    th: ({ children }) => <th>{children}</th>,
+                    tbody: ({ children }) => <tbody>{children}</tbody>,
+                    tr: ({ children }) => <tr>{children}</tr>,
+                    td: ({ children }) => <td>{children}</td>,
+                    p: ({ children }) => (
+                      <p className="mb-2 text-[#82807A] leading-relaxed text-xs">{children}</p>
                     ),
                   }}
                 >
@@ -148,7 +141,7 @@ export const CitationModal: React.FC<CitationModalProps> = ({ citation, onClose 
                 </ReactMarkdown>
               </div>
             ) : (
-              <p className="text-[#CDCBC4] whitespace-pre-wrap leading-relaxed text-xs max-w-prose font-sans">
+              <p className="text-[#CDCBC4] whitespace-pre-wrap leading-relaxed text-xs max-w-prose font-sans p-4">
                 {citation.excerpt}
               </p>
             )}

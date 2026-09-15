@@ -230,3 +230,114 @@ html, body, div, aside, main {
   background: transparent;
 }
 
+/* ==========================================================================
+   Enhancement #4: L’Écrin de Données — Curated Luxury Financial Ledger
+   Auction catalog ledger sheets: generous cell padding, hairline horizons,
+   and strict right-aligned tabular numerals with grostesk metric labels.
+   ========================================================================== */
+
+.luxury-ledger-container {
+  overflow-x: auto;
+  border-radius: 0.875rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: #0B0B0D;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.luxury-ledger {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.775rem;
+  line-height: 1.5;
+}
+
+.luxury-ledger thead {
+  background: rgba(255, 255, 255, 0.015);
+  border-bottom: 1px solid rgba(203, 178, 130, 0.22);
+}
+
+.luxury-ledger th {
+  padding: 0.75rem 1rem;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #CBB282;
+  white-space: nowrap;
+  border: none;
+}
+
+.luxury-ledger th:first-child {
+  text-align: left;
+  padding-left: 1.25rem;
+}
+
+.luxury-ledger th:not(:first-child) {
+  text-align: right;
+  padding-right: 1.25rem;
+}
+
+.luxury-ledger tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.035);
+  transition: background-color 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.luxury-ledger tbody tr:last-child {
+  border-bottom: none;
+}
+
+.luxury-ledger tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.025);
+}
+
+.luxury-ledger td {
+  padding: 0.75rem 1rem;
+  border: none;
+  vertical-align: middle;
+}
+
+/* First column: Metric description in elegant Sans */
+.luxury-ledger td:first-child {
+  text-align: left;
+  font-family: var(--font-geist-sans), -apple-system, sans-serif;
+  font-weight: 450;
+  color: #F7F7F4;
+  padding-left: 1.25rem;
+  letter-spacing: 0.005em;
+}
+
+/* Numeric columns: Right-aligned tabular lining figures */
+.luxury-ledger td:not(:first-child) {
+  text-align: right;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: -0.015em;
+  color: #CDCBC4;
+  padding-right: 1.25rem;
+}
+
+/* Footnote Citation Seal */
+.footnote-seal {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(203, 178, 130, 0.22);
+  background: rgba(203, 178, 130, 0.08);
+  color: #CBB282;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 0.1rem 0.45rem;
+  vertical-align: baseline;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  transition: all 0.2s ease;
+}
+
+.footnote-seal:hover {
+  border-color: rgba(203, 178, 130, 0.45);
+  background: rgba(203, 178, 130, 0.16);
+  box-shadow: 0 0 10px rgba(203, 178, 130, 0.25);
+}
+

@@ -237,12 +237,12 @@ export const FilingInspector: React.FC<FilingInspectorProps> = ({
           </button>
         </div>
 
-        {/* Financial Export Actions */}
+        {/* Financial Export Actions: Refined Jeweler Tools */}
         <div className="flex items-center gap-1.5">
           <button
             onClick={exportTSV}
             data-testid="copy-tsv-button"
-            className="flex items-center gap-1 rounded-md bg-[#17181D] hover:bg-white/[0.05] border border-white/[0.06] hover:border-[#CBB282]/30 px-2 py-1 text-[10px] font-mono text-[#CBB282] transition-colors cursor-pointer"
+            className="flex items-center gap-1 rounded-full bg-[#CBB282]/10 hover:bg-[#CBB282]/20 border border-[#CBB282]/25 hover:border-[#CBB282]/40 px-2.5 py-1 text-[10px] font-mono text-[#CBB282] transition-all cursor-pointer shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
             title="Copy TSV for direct paste into Excel or Google Sheets"
           >
             {copiedType === "tsv" ? (
@@ -253,7 +253,7 @@ export const FilingInspector: React.FC<FilingInspectorProps> = ({
             ) : (
               <>
                 <FileSpreadsheet className="h-3 w-3" />
-                <span>Copy TSV (Excel)</span>
+                <span>TSV (Excel)</span>
               </>
             )}
           </button>
@@ -261,7 +261,7 @@ export const FilingInspector: React.FC<FilingInspectorProps> = ({
           <button
             onClick={exportCSV}
             data-testid="copy-csv-button"
-            className="flex items-center gap-1 rounded-md bg-[#17181D] hover:bg-white/[0.05] border border-white/[0.06] hover:border-white/[0.12] px-2 py-1 text-[10px] font-mono text-[#82807A] hover:text-[#F7F7F4] transition-colors cursor-pointer"
+            className="flex items-center gap-1 rounded-full bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] hover:border-white/[0.12] px-2.5 py-1 text-[10px] font-mono text-[#CDCBC4] hover:text-[#F7F7F4] transition-all cursor-pointer shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]"
             title="Copy comma-separated CSV text"
           >
             {copiedType === "csv" ? (
@@ -280,7 +280,7 @@ export const FilingInspector: React.FC<FilingInspectorProps> = ({
           <button
             onClick={exportMemo}
             data-testid="copy-memo-button"
-            className="flex items-center gap-1 rounded-md bg-[#17181D] hover:bg-white/[0.05] border border-white/[0.06] hover:border-white/[0.12] px-2 py-1 text-[10px] font-mono text-[#82807A] hover:text-[#F7F7F4] transition-colors cursor-pointer"
+            className="flex items-center gap-1 rounded-full bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] hover:border-white/[0.12] px-2.5 py-1 text-[10px] font-mono text-[#CDCBC4] hover:text-[#F7F7F4] transition-all cursor-pointer shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]"
             title="Copy formatted institutional citation memo"
           >
             {copiedType === "memo" ? (
@@ -302,51 +302,29 @@ export const FilingInspector: React.FC<FilingInspectorProps> = ({
               <span className="tabular-nums">Page {citation.page_start}</span>
             </div>
 
-            <div className="rounded-xl border border-white/[0.05] bg-[#121216] p-3.5 text-xs shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
+            <div className="luxury-ledger-container p-1">
               {isTable ? (
-                <div className="prose prose-invert max-w-none text-xs text-[#F7F7F4]">
+                <div className="overflow-x-auto">
                   <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
                     components={{
                       table: ({ children }) => (
-                        <div className="overflow-x-auto my-1">
-                          <table className="w-full text-left border-collapse text-xs tabular-nums font-mono">
-                            {children}
-                          </table>
-                        </div>
-                      ),
-                      thead: ({ children }) => (
-                        <thead className="border-b border-white/[0.06] bg-white/[0.015] text-[10px] font-mono tracking-wider uppercase text-[#CBB282]">
+                        <table className="luxury-ledger">
                           {children}
-                        </thead>
+                        </table>
                       ),
-                      th: ({ children }) => (
-                        <th className="px-3 py-2 font-medium text-[#CBB282] border-r border-white/[0.04] last:border-0">
-                          {children}
-                        </th>
-                      ),
-                      tbody: ({ children }) => (
-                        <tbody className="divide-y divide-white/[0.035] font-mono text-[11px]">
-                          {children}
-                        </tbody>
-                      ),
-                      tr: ({ children }) => (
-                        <tr className="hover:bg-white/[0.025] transition-colors">
-                          {children}
-                        </tr>
-                      ),
-                      td: ({ children }) => (
-                        <td className="px-3 py-2 text-[#CDCBC4] tabular-nums font-mono border-r border-white/[0.035] last:border-0">
-                          {children}
-                        </td>
-                      ),
+                      thead: ({ children }) => <thead>{children}</thead>,
+                      th: ({ children }) => <th>{children}</th>,
+                      tbody: ({ children }) => <tbody>{children}</tbody>,
+                      tr: ({ children }) => <tr>{children}</tr>,
+                      td: ({ children }) => <td>{children}</td>,
                     }}
                   >
                     {citation.excerpt}
                   </ReactMarkdown>
                 </div>
               ) : (
-                <p className="whitespace-pre-wrap leading-relaxed text-[#CDCBC4] font-sans">
+                <p className="whitespace-pre-wrap leading-relaxed text-[#CDCBC4] font-sans p-4 text-xs">
                   {citation.excerpt}
                 </p>
               )}
