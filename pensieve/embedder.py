@@ -62,7 +62,7 @@ def truncate_to_tokens(text: str, max_tokens: int) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Local provider (sentence-transformers / bge-small-en-v1.5)
+# Local provider (fastembed ONNX / sentence-transformers / bge-small-en-v1.5)
 # ---------------------------------------------------------------------------
 
 _local_model = None  # Lazy-loaded once on first use
@@ -71,12 +71,25 @@ _local_model = None  # Lazy-loaded once on first use
 def _get_local_model():
     global _local_model  # noqa: PLW0603
     if _local_model is None:
+        # 1. Prefer fastembed (ONNX runtime) for ~90MB RAM footprint instead of ~600MB PyTorch
+        try:
+            from fastembed import TextEmbedding  # type: ignore[import-untyped]
+            log.info("Loading local embedding model via fastembed (ONNX): %s", EMBEDDING_MODEL_LOCAL)
+            _local_model = TextEmbedding(model_name=EMBEDDING_MODEL_LOCAL)
+            log.info("Fastembed ONNX model loaded successfully (lightweight RAM profile).")
+            return _local_model
+        except ImportError:
+            log.debug("fastembed not installed; falling back to sentence-transformers.")
+        except Exception as exc:
+            log.warning("fastembed failed to initialize (%s); falling back to sentence-transformers.", exc)
+
+        # 2. Fallback to sentence-transformers if fastembed is unavailable
         try:
             from sentence_transformers import SentenceTransformer  # type: ignore[import-untyped]
         except ImportError as exc:
             raise ImportError(
-                "sentence-transformers is required for the local embedding provider. "
-                "Install it with: pip install sentence-transformers"
+                "Neither fastembed nor sentence-transformers is installed. "
+                "Install fastembed with: pip install fastembed"
             ) from exc
         log.info("Loading local embedding model: %s", EMBEDDING_MODEL_LOCAL)
         _local_model = SentenceTransformer(EMBEDDING_MODEL_LOCAL)
@@ -88,13 +101,30 @@ def _get_local_model():
 
 
 def _embed_local(texts: list[str]) -> list[list[float]]:
-    """Embed *texts* using the local sentence-transformers model."""
+    """Embed *texts* using fastembed (preferred) or sentence-transformers."""
     model = _get_local_model()
     all_vectors: list[list[float]] = []
+
+    # fastembed generator path
+    if hasattr(model, "embed") and not hasattr(model, "encode"):
+        for i in range(0, len(texts), EMBEDDING_BATCH_SIZE):
+            batch = texts[i : i + EMBEDDING_BATCH_SIZE]
+            vecs = model.embed(batch)
+            for v in vecs:
+                all_vectors.append(v.tolist() if hasattr(v, "tolist") else list(v))
+            log.debug(
+                "fastembed embed: batch %d-%d / %d",
+                i + 1,
+                min(i + EMBEDDING_BATCH_SIZE, len(texts)),
+                len(texts),
+            )
+        return all_vectors
+
+    # sentence-transformers or mock model path
     for i in range(0, len(texts), EMBEDDING_BATCH_SIZE):
         batch = texts[i : i + EMBEDDING_BATCH_SIZE]
         vecs = model.encode(batch, show_progress_bar=False, convert_to_numpy=True)
-        all_vectors.extend(vecs.tolist())
+        all_vectors.extend(vecs.tolist() if hasattr(vecs, "tolist") else list(vecs))
         log.debug(
             "Local embed: batch %d-%d / %d", i + 1, min(i + EMBEDDING_BATCH_SIZE, len(texts)), len(texts)
         )
@@ -191,7 +221,10 @@ def get_vector_dim(provider: str = EMBEDDING_PROVIDER) -> int:
             res = model.get_sentence_embedding_dimension()
             if res is not None and not (type(res).__name__ == "MagicMock"):
                 return int(res)
-        return int(model.get_embedding_dimension())
+        if hasattr(model, "get_embedding_dimension"):
+            return int(model.get_embedding_dimension())
+        # Fastembed default dimension for BAAI/bge-small-en-v1.5
+        return 384
     if provider == "openai":
         return 1536  # text-embedding-3-small fixed dimension
     raise ValueError(f"Unknown embedding provider: {provider!r}")

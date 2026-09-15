@@ -199,3 +199,29 @@ class TestEmbedTextsOpenAI:
         from pensieve.embedder import embed_texts
         with pytest.raises(ValueError, match="Unknown embedding provider"):
             embed_texts(["x"], provider="unknown_provider")
+
+
+# ---------------------------------------------------------------------------
+# embed_texts — fastembed provider path
+# ---------------------------------------------------------------------------
+
+class TestEmbedTextsFastEmbed:
+    def test_fastembed_output_and_dimension(self):
+        import numpy as np
+        from pensieve.embedder import embed_texts, get_vector_dim
+
+        mock_fastembed_model = MagicMock(spec=["embed"])
+        mock_fastembed_model.embed.return_value = [
+            np.ones(384, dtype=float),
+            np.zeros(384, dtype=float),
+        ]
+
+        with patch("pensieve.embedder._get_local_model", return_value=mock_fastembed_model):
+            dim = get_vector_dim("local")
+            assert dim == 384
+            res = embed_texts(["query 1", "query 2"], provider="local")
+            assert len(res) == 2
+            assert len(res[0]) == 384
+            assert res[0][0] == 1.0
+            assert res[1][0] == 0.0
+
