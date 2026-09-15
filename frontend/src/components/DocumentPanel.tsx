@@ -171,9 +171,9 @@ export const DocumentPanel: React.FC<DocumentPanelProps> = ({
             <div className="flex items-center gap-1.5">
               <span
                 data-testid="showcase-catalog-badge"
-                className="rounded-full bg-[#CBB282]/10 border border-[#CBB282]/25 px-2.5 py-0.5 text-[10px] font-mono tracking-wider uppercase text-[#CBB282]"
+                className="rounded-full bg-[#CBB282]/8 border border-[#CBB282]/20 px-2.5 py-0.5 text-[9.5px] font-serif italic tracking-[0.04em] text-[#CBB282] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
               >
-                Showcase Catalog
+                Collection Permanente
               </span>
               {onToggleCollapse && (
                 <button
@@ -198,7 +198,7 @@ export const DocumentPanel: React.FC<DocumentPanelProps> = ({
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search catalog filings..."
                 data-testid="search-catalog-input"
-                className="w-full rounded-xl border border-white/[0.05] bg-white/[0.02] pl-8.5 pr-8 py-1.5 text-xs text-[#F7F7F4] placeholder-[#4A4944] transition-all duration-200 focus:border-[#CBB282]/40 focus:bg-white/[0.04] focus:shadow-[0_0_16px_rgba(203,178,130,0.12)] outline-none font-sans"
+                className="w-full rounded-xl border border-white/[0.05] bg-white/[0.015] pl-8.5 pr-8 py-1.5 text-xs text-[#F7F7F4] placeholder-[#4A4944] transition-all duration-200 focus:border-[#CBB282]/35 focus:bg-white/[0.03] shadow-[inset_0_1px_0_rgba(255,255,255,0.02)] outline-none font-sans"
               />
               {searchQuery && (
                 <button
@@ -216,10 +216,10 @@ export const DocumentPanel: React.FC<DocumentPanelProps> = ({
             <button
               onClick={() => onSelectDoc(null)}
               data-testid="filter-all-documents"
-              className={`flex w-full items-center justify-between rounded-xl px-3.5 py-2.5 text-xs transition-all duration-200 cursor-pointer border ${
+              className={`flex w-full items-center justify-between rounded-xl px-3.5 py-2 text-xs transition-all duration-200 cursor-pointer border ${
                 selectedDoc === null
-                  ? "bg-gradient-to-r from-[#CBB282]/15 to-[#CBB282]/5 text-[#F7F7F4] font-medium border-[#CBB282]/30 shadow-[0_0_16px_rgba(203,178,130,0.12),inset_0_1px_0_rgba(255,255,255,0.06)]"
-                  : "border-white/[0.04] bg-white/[0.02] text-[#82807A] hover:bg-white/[0.05] hover:text-[#F7F7F4]"
+                  ? "bg-[#17181D]/90 text-[#F7F7F4] font-medium border-[#CBB282]/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_2px_12px_rgba(0,0,0,0.4)]"
+                  : "border-white/[0.04] bg-white/[0.015] text-[#82807A] hover:bg-white/[0.04] hover:text-[#F7F7F4]"
               }`}
             >
               <span className="flex items-center gap-2.5">
@@ -227,7 +227,7 @@ export const DocumentPanel: React.FC<DocumentPanelProps> = ({
                 <span className="tracking-wide">All filings (Cross-compare)</span>
               </span>
               {selectedDoc === null && (
-                <span className="text-[10px] bg-[#CBB282]/20 text-[#CBB282] px-2 py-0.5 rounded-full font-mono tracking-widest uppercase border border-[#CBB282]/30 font-semibold">
+                <span className="text-[9.5px] bg-[#CBB282]/15 text-[#CBB282] px-2 py-0.5 rounded-full font-mono tracking-widest uppercase border border-[#CBB282]/25 font-semibold">
                   Active
                 </span>
               )}
@@ -247,136 +247,138 @@ export const DocumentPanel: React.FC<DocumentPanelProps> = ({
             </div>
           )}
 
-          {/* Document List */}
-          <div className="flex-1 overflow-y-auto space-y-2.5 pr-1">
+          {/* Document List: Archival Ledger Architecture */}
+          <div className="flex-1 overflow-y-auto pr-0.5">
             {isLoading && documents.length === 0 ? (
-              <div className="py-8 text-center text-xs text-[#8C93A5] animate-skeleton font-serif italic">
+              <div className="py-8 text-center text-xs text-[#82807A] animate-skeleton font-serif italic">
                 Chargement des rapports...
               </div>
             ) : documents.length === 0 ? (
               <div
                 data-testid="empty-catalog-state"
-                className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-white/10 p-6 text-center text-[#8C93A5] mt-4 bg-white/[0.02]"
+                className="flex flex-col items-center justify-center rounded-xl border border-dashed border-white/[0.06] p-6 text-center text-[#82807A] mt-4 bg-white/[0.01]"
               >
-                <FileText className="h-6 w-6 text-[#585E70] mb-2 stroke-[1.5]" />
-                <p className="font-serif text-sm font-medium text-[#F1F3F9]">No filings found</p>
-                <p className="text-[11px] text-[#8C93A5] mt-1 font-light">
+                <FileText className="h-6 w-6 text-[#4A4944] mb-2 stroke-[1.5]" />
+                <p className="font-serif text-sm font-medium text-[#F7F7F4]">No filings found</p>
+                <p className="text-[11px] text-[#82807A] mt-1 font-light">
                   Showcase catalog is currently connecting to index.
                 </p>
               </div>
             ) : (
-              filteredDocuments.map((doc) => {
-                const isSelected = selectedDoc?.doc_id === doc.doc_id;
+              <div className="rounded-xl border border-white/[0.05] bg-[#121216]/40 backdrop-blur-md divide-y divide-white/[0.035] overflow-hidden shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
+                {filteredDocuments.map((doc) => {
+                  const isSelected = selectedDoc?.doc_id === doc.doc_id;
 
-                return (
-                  <div
-                    key={doc.doc_id}
-                    onClick={() => onSelectDoc(isSelected ? null : doc)}
-                    data-testid={`document-item-${doc.doc_id.slice(0, 8)}`}
-                    className={`group relative cursor-pointer rounded-2xl border p-4 transition-all duration-200 ${
-                      isSelected
-                        ? "border-[#CBB282]/40 bg-gradient-to-br from-[#1A1812] via-[#141419] to-[#101014] shadow-[inset_0_0_24px_rgba(203,178,130,0.08),0_6px_24px_rgba(0,0,0,0.6)]"
-                        : "border-white/[0.04] bg-[#121216]/60 hover:border-white/[0.10] hover:bg-[#17181D]/80 shadow-[0_4px_16px_rgba(0,0,0,0.3)]"
-                    }`}
-                  >
-                    {/* Active jewel left blade */}
-                    {isSelected && (
-                      <div className="absolute left-0 top-3.5 bottom-3.5 w-1 rounded-r-full bg-[#CBB282] shadow-[0_0_10px_#CBB282]" />
-                    )}
+                  return (
+                    <div
+                      key={doc.doc_id}
+                      onClick={() => onSelectDoc(isSelected ? null : doc)}
+                      data-testid={`document-item-${doc.doc_id.slice(0, 8)}`}
+                      className={`group relative cursor-pointer px-3.5 py-3 transition-all duration-200 ${
+                        isSelected
+                          ? "bg-[#181820]/90 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
+                          : "hover:bg-white/[0.025]"
+                      }`}
+                    >
+                      {/* Active jewel left blade: gossamer 2px precision hairline */}
+                      {isSelected && (
+                        <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-[#CBB282] shadow-[0_0_8px_#CBB282]" />
+                      )}
 
-                    <div className="flex items-start justify-between gap-2">
-                      <h4 className="font-serif text-[13.5px] font-medium text-[#F7F7F4] group-hover:text-[#CBB282] transition-colors line-clamp-1 tracking-[0.01em]">
-                        {doc.company_name}
-                      </h4>
-                      
-                      <div className="flex items-center gap-1.5 shrink-0">
-                        <span className="rounded-full bg-white/[0.04] px-2 py-0.5 text-[10px] font-mono text-[#CDCBC4] tabular-nums border border-white/[0.05]">
-                          {formatFiscalYear(doc.fiscal_year)}
+                      <div className="flex items-start justify-between gap-2">
+                        <h4 className="font-serif text-[13.5px] font-medium text-[#F7F7F4] group-hover:text-[#CBB282] transition-colors line-clamp-1 tracking-[0.01em]">
+                          {doc.company_name}
+                        </h4>
+
+                        <div className="flex items-center gap-1.5 shrink-0">
+                          <span className="rounded-full bg-white/[0.03] px-2 py-0.5 text-[9.5px] font-mono text-[#CDCBC4] tabular-nums border border-white/[0.05]">
+                            {formatFiscalYear(doc.fiscal_year)}
+                          </span>
+
+                          {/* Quiet Destructive Delete Affordance (Hover/Focus Only - Hidden in Showcase Mode) */}
+                          {!isShowcaseMode && (
+                            <button
+                              type="button"
+                              data-testid={`delete-doc-button-${doc.doc_id.slice(0, 8)}`}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setDocToDelete(doc);
+                              }}
+                              className="opacity-0 group-hover:opacity-100 focus:opacity-100 rounded p-1 text-[#82807A] hover:bg-[#EF4444]/15 hover:text-[#EF4444] transition-all cursor-pointer"
+                              title={`Delete ${doc.company_name} filing`}
+                              aria-label={`Delete ${doc.company_name}`}
+                            >
+                              <Trash2 className="h-3.5 w-3.5 stroke-[1.5]" />
+                            </button>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="mt-2 flex items-center gap-2 text-[10.5px] text-[#82807A] font-light">
+                        <span className="flex items-center gap-1">
+                          <Calendar className="h-3 w-3 text-[#585E70] stroke-[1.5]" />
+                          <span className="tabular-nums font-mono text-[10px]">{doc.num_pages} pages</span>
                         </span>
+                        <span className="text-white/10">•</span>
+                        <span className="tabular-nums font-mono text-[10px]">{doc.table_chunks} tables</span>
+                      </div>
 
-                        {/* Quiet Destructive Delete Affordance (Hover/Focus Only - Hidden in Showcase Mode) */}
-                        {!isShowcaseMode && (
-                          <button
-                            type="button"
-                            data-testid={`delete-doc-button-${doc.doc_id.slice(0, 8)}`}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setDocToDelete(doc);
-                            }}
-                            className="opacity-0 group-hover:opacity-100 focus:opacity-100 rounded p-1 text-[#8C93A5] hover:bg-[#EF4444]/15 hover:text-[#EF4444] transition-all cursor-pointer"
-                            title={`Delete ${doc.company_name} filing`}
-                            aria-label={`Delete ${doc.company_name}`}
+                      {/* Refined Extraction Risk Indicator (Complication Sub-Dial Style) */}
+                      <div className="mt-2 pt-1.5 border-t border-white/[0.03] flex items-center justify-between text-[10.5px]">
+                        {doc.table_chunks_flagged > 0 ? (
+                          <span
+                            data-testid={`flagged-indicator-${doc.doc_id.slice(0, 8)}`}
+                            className="inline-flex items-center gap-1.5 text-[#D4A373] font-mono text-[9.5px] tabular-nums"
+                            title={`${doc.table_chunks_flagged} of ${doc.table_chunks} tables flagged during extraction.`}
                           >
-                            <Trash2 className="h-3.5 w-3.5 stroke-[1.5]" />
-                          </button>
+                            <ShieldAlert className="h-3 w-3 shrink-0 stroke-[1.8]" />
+                            <span>
+                              {doc.table_chunks_flagged} of {doc.table_chunks} tables flagged
+                            </span>
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center gap-1.5 text-[#52B788] font-mono text-[9.5px] tabular-nums">
+                            <Check className="h-3 w-3 shrink-0 stroke-[2]" />
+                            <span>All {doc.table_chunks} tables clean</span>
+                          </span>
                         )}
                       </div>
                     </div>
-
-                    <div className="mt-2.5 flex items-center gap-2 text-[11px] text-[#8C93A5] font-light">
-                      <span className="flex items-center gap-1">
-                        <Calendar className="h-3 w-3 text-[#585E70] stroke-[1.5]" />
-                        <span className="tabular-nums font-mono text-[10px]">{doc.num_pages} pages</span>
-                      </span>
-                      <span className="text-white/10">•</span>
-                      <span className="tabular-nums font-mono text-[10px]">{doc.table_chunks} tables</span>
-                    </div>
-
-                    {/* Refined Extraction Risk Indicator (Complication Sub-Dial Style) */}
-                    <div className="mt-2.5 pt-2 border-t border-white/[0.04] flex items-center justify-between text-[11px]">
-                      {doc.table_chunks_flagged > 0 ? (
-                        <span
-                          data-testid={`flagged-indicator-${doc.doc_id.slice(0, 8)}`}
-                          className="inline-flex items-center gap-1.5 text-[#D4A373] font-mono text-[10px] tabular-nums"
-                          title={`${doc.table_chunks_flagged} of ${doc.table_chunks} tables flagged during extraction.`}
-                        >
-                          <ShieldAlert className="h-3 w-3 shrink-0 stroke-[1.8]" />
-                          <span>
-                            {doc.table_chunks_flagged} of {doc.table_chunks} tables flagged
-                          </span>
-                        </span>
-                      ) : (
-                        <span className="inline-flex items-center gap-1.5 text-[#52B788] font-mono text-[10px] tabular-nums">
-                          <Check className="h-3 w-3 shrink-0 stroke-[2]" />
-                          <span>All {doc.table_chunks} tables clean</span>
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                );
-              })
+                  );
+                })}
+              </div>
             )}
           </div>
 
-        {/* Scope Footer */}
-        <div className="border-t border-white/[0.06] pt-3 text-[11px] text-[#82807A]">
-          {selectedDoc ? (
-            <div className="flex items-center justify-between">
-              <span className="truncate">
-                Scoped: <strong className="text-[#F7F7F4] font-medium">{selectedDoc.company_name}</strong>
-              </span>
-              <button
-                onClick={() => onSelectDoc(null)}
-                className="text-[#CBB282] hover:underline shrink-0 ml-1 cursor-pointer font-medium"
-              >
-                Clear
-              </button>
-            </div>
-          ) : (
-            <span className="text-[#82807A]/80">Cross-document catalog scope</span>
-          )}
+          {/* Scope Footer */}
+          <div className="border-t border-white/[0.04] pt-3 text-[11px] text-[#82807A]">
+            {selectedDoc ? (
+              <div className="flex items-center justify-between">
+                <span className="truncate">
+                  Scoped: <strong className="text-[#F7F7F4] font-medium">{selectedDoc.company_name}</strong>
+                </span>
+                <button
+                  onClick={() => onSelectDoc(null)}
+                  className="text-[#CBB282] hover:underline shrink-0 ml-1 cursor-pointer font-medium"
+                >
+                  Clear
+                </button>
+              </div>
+            ) : (
+              <span className="text-[#82807A]/80 font-mono text-[10px]">Cross-document catalog scope</span>
+            )}
 
-          {isShowcaseMode && (
-            <div
-              data-testid="showcase-corpus-notice"
-              className="mt-2.5 pt-2.5 border-t border-white/[0.04] text-[10px] text-[#82807A]/75 leading-relaxed"
-            >
-              <span className="text-[#CBB282] font-medium">Fixed Demo Catalog:</span>{" "}
-              Pre-ingested 5-filing corporate corpus. Live PDF upload and deletion are disabled in this public deployment.
-            </div>
-          )}
-        </div>
-      </aside>
+            {isShowcaseMode && (
+              <div
+                data-testid="showcase-corpus-notice"
+                className="mt-2.5 pt-2 border-t border-white/[0.035] text-[9.5px] text-[#82807A]/75 leading-relaxed"
+              >
+                <span className="text-[#CBB282] font-serif italic">Collection Permanente:</span>{" "}
+                Pre-ingested 5-filing corporate corpus. Cell-level mathematical verification active.
+              </div>
+            )}
+          </div>
+        </aside>
       )}
 
       {/* Irreversible Delete Confirmation Dialog (Never rendered in Showcase Mode) */}

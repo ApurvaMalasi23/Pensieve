@@ -466,18 +466,18 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
                 Interrogate corporate filings with <span className="text-[#F1F3F9] font-medium">cell-level mathematical verification</span> and unbreakable source provenance.
               </p>
 
-              {/* Bespoke Inquiry Ledger: Smoked Crystal Slab Architecture */}
+              {/* Bespoke Inquiry Ledger: Archival Ledger Strip Architecture */}
               <div className="mt-9 w-full text-left">
                 <div className="flex items-center justify-between mb-2.5 px-1">
-                  <span className="text-[10px] font-mono uppercase tracking-[0.24em] text-[#8C93A5]">
+                  <span className="text-[9.5px] font-mono uppercase tracking-[0.26em] text-[#82807A]">
                     {selectedDoc ? `${selectedDoc.company_name} · Inquiries` : "Curated Dossier Inquiries"}
                   </span>
-                  <span className="text-[10px] font-mono text-[#585E70] uppercase tracking-wider">
+                  <span className="text-[9.5px] font-mono text-[#585E70] uppercase tracking-wider">
                     Click to query
                   </span>
                 </div>
 
-                <div className="rounded-2xl border border-white/[0.05] bg-[#121216]/60 backdrop-blur-2xl divide-y divide-white/[0.03] shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.04)] overflow-hidden">
+                <div className="rounded-2xl border border-white/[0.05] bg-[#121216]/50 backdrop-blur-2xl divide-y divide-white/[0.035] shadow-[0_24px_60px_-15px_rgba(0,0,0,0.7),inset_0_1px_0_rgba(255,255,255,0.06)] overflow-hidden">
                   {currentInquiries.map((item) => (
                     <button
                       key={item.index}
@@ -486,17 +486,17 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
                         setInputQuery(item.text);
                         inputRef.current?.focus();
                       }}
-                      className="group relative flex w-full items-start gap-4 p-4 text-left transition-all duration-200 hover:bg-white/[0.02] cursor-pointer"
+                      className="group relative flex w-full items-start gap-4 p-4 text-left transition-all duration-200 hover:bg-white/[0.025] cursor-pointer"
                     >
                       {/* Interactive champagne hairline blade reveal */}
-                      <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-[#CBB282] opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-[0_0_8px_#CBB282]" />
+                      <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-[#CBB282] opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-[0_0_8px_#CBB282]" />
                       
                       <span className="font-mono text-[11px] sm:text-[11.5px] font-semibold text-[#CBB282]/80 group-hover:text-[#CBB282] pt-0.5 tabular-nums shrink-0 transition-colors">
                         {item.index}
                       </span>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1">
-                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium tracking-wide bg-white/[0.04] text-[#CDCBC4] group-hover:text-[#CBB282] group-hover:bg-[#CBB282]/10 transition-colors border border-white/[0.04]">
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9.5px] font-medium tracking-wide bg-white/[0.03] text-[#CDCBC4] group-hover:text-[#CBB282] group-hover:bg-[#CBB282]/10 transition-colors border border-white/[0.04] group-hover:border-[#CBB282]/20">
                             {item.label}
                           </span>
                           <span className="text-white/10 text-[9px]">•</span>
@@ -530,11 +530,11 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
         </div>
       </div>
 
-      {/* Monolithic Floating Input Dock */}
+      {/* Monolithic Floating Input Dock: Sculptural Frosted Glass Architecture */}
       <div className="relative px-4 pb-6 pt-2 bg-gradient-to-t from-[#0B0B0D] via-[#0B0B0D]/95 to-transparent">
         <form
           onSubmit={handleSubmit}
-          className="relative mx-auto flex max-w-3xl items-end rounded-2xl border border-white/[0.06] bg-[#121216]/85 backdrop-blur-2xl px-4 py-3.5 shadow-[0_20px_50px_rgba(0,0,0,0.8),inset_0_1px_0_rgba(255,255,255,0.06)] transition-all duration-300 focus-within:border-[#CBB282]/40 focus-within:shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_24px_rgba(203,178,130,0.12),inset_0_1px_0_rgba(255,255,255,0.10)]"
+          className="relative mx-auto flex max-w-3xl items-end rounded-2xl border border-white/[0.07] bg-[#121216]/80 backdrop-blur-2xl px-4 py-3.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_24px_50px_-12px_rgba(0,0,0,0.85)] transition-all duration-300 focus-within:border-[#CBB282]/40 focus-within:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_24px_60px_-10px_rgba(0,0,0,0.92),0_0_28px_rgba(203,178,130,0.14)]"
         >
           <textarea
             ref={inputRef}

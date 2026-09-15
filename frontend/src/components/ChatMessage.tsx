@@ -25,10 +25,10 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
     return (
       <div className="flex justify-end mb-6">
         <div className="flex max-w-[85%] sm:max-w-[70%] flex-col items-end">
-          <div className="rounded-2xl rounded-tr-xs bg-gradient-to-br from-[#181C28] to-[#13161F] border border-white/[0.09] px-4.5 py-3 text-sm text-[#F1F3F9] shadow-[0_10px_25px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.08)]">
+          <div className="rounded-2xl rounded-tr-xs bg-[#17181D]/90 border border-white/[0.07] px-4.5 py-3 text-sm text-[#F7F7F4] shadow-[0_8px_24px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.06)]">
             <p className="whitespace-pre-wrap leading-relaxed font-light">{message.content}</p>
           </div>
-          <span className="mt-1.5 text-[10px] text-[#8C93A5] tabular-nums font-mono">
+          <span className="mt-1.5 text-[10px] text-[#82807A] tabular-nums font-mono">
             {message.timestamp}
           </span>
         </div>
@@ -41,14 +41,14 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
     return (
       <div className="flex justify-start mb-6">
         <div className="flex max-w-[90%] sm:max-w-[80%] flex-col">
-          <div className="rounded-2xl rounded-tl-xs bg-[#EF4444]/10 border border-[#EF4444]/25 p-4 text-xs text-[#EF4444] backdrop-blur-md">
-            <div className="flex items-center gap-1.5 font-semibold text-[#EF4444] mb-1">
+          <div className="rounded-2xl rounded-tl-xs bg-[#E06D6D]/10 border border-[#E06D6D]/25 p-4 text-xs text-[#E06D6D] backdrop-blur-md">
+            <div className="flex items-center gap-1.5 font-semibold text-[#E06D6D] mb-1">
               <AlertCircle className="h-4 w-4 stroke-[1.8]" />
               <span>Request Error</span>
             </div>
             <p className="whitespace-pre-wrap leading-relaxed">{message.errorMessage || message.content}</p>
           </div>
-          <span className="mt-1.5 text-[10px] text-[#8C93A5] tabular-nums font-mono">
+          <span className="mt-1.5 text-[10px] text-[#82807A] tabular-nums font-mono">
             {message.timestamp}
           </span>
         </div>
@@ -63,19 +63,19 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
         {payload?.comparison ? (
           <ComparisonView response={payload} onSelectCitation={onSelectCitation} />
         ) : (
-          <div className="animate-settle rounded-2xl rounded-tl-xs bg-[#13161F]/80 backdrop-blur-2xl border border-white/[0.06] p-5.5 space-y-4 shadow-[0_16px_40px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.04)]">
+          <div className="animate-settle rounded-2xl rounded-tl-xs bg-[#121216]/75 backdrop-blur-2xl border border-white/[0.05] p-5.5 space-y-4 shadow-[0_16px_40px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.05)]">
             {/* No context found callout */}
             {payload?.no_context_found ? (
               <div
                 data-testid="no-context-callout"
-                className="flex items-start gap-3 rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4 text-xs text-[#8C93A5]"
+                className="flex items-start gap-3 rounded-2xl border border-white/[0.05] bg-white/[0.015] p-4 text-xs text-[#82807A]"
               >
-                <HelpCircle className="h-4 w-4 shrink-0 text-[#8C93A5] mt-0.5 stroke-[1.5]" />
+                <HelpCircle className="h-4 w-4 shrink-0 text-[#82807A] mt-0.5 stroke-[1.5]" />
                 <div>
-                  <span className="font-semibold text-[#F1F3F9] block text-sm">
+                  <span className="font-semibold text-[#F7F7F4] block text-sm">
                     No matching context found
                   </span>
-                  <p className="mt-1 leading-relaxed text-[#8C93A5] font-light">
+                  <p className="mt-1 leading-relaxed text-[#82807A] font-light">
                     Pensieve declined to answer because no relevant sections or financial tables were found
                     matching your query in the currently ingested filings.
                   </p>
@@ -83,42 +83,42 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
               </div>
             ) : (
               /* Financial-Grade Markdown Surface with strict tabular lining numerals */
-              <div className="text-[13.5px] sm:text-sm leading-[1.68] text-[#F1F3F9] font-sans">
+              <div className="text-[13.5px] sm:text-sm leading-[1.68] text-[#F7F7F4] font-sans">
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   components={{
                     p: ({ children }) => (
-                      <p className="mb-3.5 last:mb-0 leading-[1.68] text-[#F1F3F9] font-normal">{children}</p>
+                      <p className="mb-3.5 last:mb-0 leading-[1.68] text-[#F7F7F4] font-normal">{children}</p>
                     ),
                     strong: ({ children }) => (
                       <strong className="font-semibold text-[#FFFFFF]">{children}</strong>
                     ),
                     ul: ({ children }) => (
-                      <ul className="mb-3.5 list-disc pl-5 space-y-1.5 text-[#C2C7D4] font-normal">{children}</ul>
+                      <ul className="mb-3.5 list-disc pl-5 space-y-1.5 text-[#CDCBC4] font-normal">{children}</ul>
                     ),
                     ol: ({ children }) => (
-                      <ol className="mb-3.5 list-decimal pl-5 space-y-1.5 text-[#C2C7D4] font-normal">{children}</ol>
+                      <ol className="mb-3.5 list-decimal pl-5 space-y-1.5 text-[#CDCBC4] font-normal">{children}</ol>
                     ),
                     li: ({ children }) => <li className="leading-[1.68]">{children}</li>,
                     table: ({ children }) => (
-                      <div className="my-4 overflow-x-auto rounded-xl border border-white/[0.08] bg-[#0A0B0E]/80 p-1 shadow-inner">
+                      <div className="my-4 overflow-x-auto rounded-xl border border-white/[0.05] bg-[#0B0B0D] p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
                         <table className="w-full border-collapse text-left text-xs tabular-nums font-mono">
                           {children}
                         </table>
                       </div>
                     ),
                     thead: ({ children }) => (
-                      <thead className="border-b border-white/[0.08] bg-white/[0.02] text-[10px] font-mono tracking-wider uppercase text-[#8C93A5]">
+                      <thead className="border-b border-white/[0.06] bg-white/[0.015] text-[10px] font-mono tracking-wider uppercase text-[#CBB282]">
                         {children}
                       </thead>
                     ),
                     th: ({ children }) => (
-                      <th className="px-3.5 py-2 font-semibold text-[#E59500]">
+                      <th className="px-3.5 py-2 font-medium text-[#CBB282] border-r border-white/[0.04] last:border-0">
                         {children}
                       </th>
                     ),
                     tbody: ({ children }) => (
-                      <tbody className="divide-y divide-white/6 font-mono text-xs tabular-nums">
+                      <tbody className="divide-y divide-white/[0.035] font-mono text-xs tabular-nums">
                         {children}
                       </tbody>
                     ),
@@ -128,20 +128,20 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
                       </tr>
                     ),
                     td: ({ children }) => (
-                      <td className="px-3.5 py-2 text-[#C2C7D4] font-mono text-xs tabular-nums">
+                      <td className="px-3.5 py-2 text-[#CDCBC4] font-mono text-xs tabular-nums border-r border-white/[0.035] last:border-0">
                         {children}
                       </td>
                     ),
                     code: ({ inline, children, ...props }: any) =>
                       inline ? (
                         <code
-                          className="rounded bg-white/6 px-1.5 py-0.5 font-mono text-xs text-[#E59500]"
+                          className="rounded bg-[#CBB282]/10 border border-[#CBB282]/20 px-1.5 py-0.5 font-mono text-xs text-[#CBB282]"
                           {...props}
                         >
                           {children}
                         </code>
                       ) : (
-                        <pre className="my-3 overflow-x-auto rounded-lg bg-[#0A0B0E] p-3 font-mono text-xs text-[#C2C7D4] border border-white/8">
+                        <pre className="my-3 overflow-x-auto rounded-lg bg-[#0B0B0D] p-3 font-mono text-xs text-[#CDCBC4] border border-white/[0.05]">
                           <code>{children}</code>
                         </pre>
                       ),
@@ -154,7 +154,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
 
             {/* Verification Badge with Micro-Audit Accordion */}
             {payload?.verification && payload.verification.status !== "not_applicable" && (
-              <div className="pt-2 border-t border-white/6">
+              <div className="pt-2 border-t border-white/[0.04]">
                 <VerificationBadge
                   status={payload.verification.status}
                   reason={payload.verification.reason}
@@ -164,9 +164,9 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
 
             {/* Citations list */}
             {payload?.citations && payload.citations.length > 0 && (
-              <div className="pt-2.5 border-t border-white/6">
-                <span className="text-[11px] font-medium text-[#8C93A5] block mb-1.5 font-sans">
-                  Source citations ({payload.citations.length}):
+              <div className="pt-2.5 border-t border-white/[0.04]">
+                <span className="text-[10.5px] font-mono uppercase tracking-wider text-[#82807A] block mb-1.5">
+                  Source Citations ({payload.citations.length}):
                 </span>
                 <div className="flex flex-wrap gap-1.5">
                   {payload.citations.map((cit, idx) => (
@@ -180,9 +180,9 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
               </div>
             )}
 
-            <div className="flex items-center justify-between pt-1 text-[10.5px] text-[#8C93A5]">
+            <div className="flex items-center justify-between pt-1 text-[10.5px] text-[#82807A]">
               <span>
-                Intent: <strong className="text-[#F1F3F9] font-medium">{payload?.intent || "narrative"}</strong>
+                Intent: <strong className="text-[#F7F7F4] font-medium">{payload?.intent || "narrative"}</strong>
               </span>
               <span className="tabular-nums font-mono text-[10px]">{message.timestamp}</span>
             </div>
