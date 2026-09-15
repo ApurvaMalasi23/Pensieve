@@ -22,9 +22,7 @@ export default function Home() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isInspectorFullscreen, setIsInspectorFullscreen] = useState(false);
   const [injectedQuery, setInjectedQuery] = useState<string | null>(null);
-  const [isShowcaseMode, setIsShowcaseMode] = useState<boolean>(() => {
-    return process.env.NEXT_PUBLIC_SHOWCASE_MODE === "true";
-  });
+  const [isShowcaseMode, setIsShowcaseMode] = useState<boolean>(true);
 
   const loadDocuments = useCallback(async () => {
     try {
@@ -47,12 +45,10 @@ export default function Home() {
     setIsBackendConnected(isHealthy);
     if (healthData?.showcase_mode !== undefined) {
       setIsShowcaseMode(Boolean(healthData.showcase_mode));
-    } else if (process.env.NEXT_PUBLIC_SHOWCASE_MODE === "true") {
-      setIsShowcaseMode(true);
     }
   };
 
-  // Global power-user shortcuts (Cmd+K, Cmd+\, Cmd+U)
+  // Global power-user shortcuts (Cmd+K, Cmd+\)
   useEffect(() => {
     const handleGlobalShortcuts = (e: KeyboardEvent) => {
       const isCmdOrCtrl = e.metaKey || e.ctrlKey;
@@ -68,19 +64,11 @@ export default function Home() {
         e.preventDefault();
         setIsSidebarCollapsed((prev) => !prev);
       }
-
-      // Cmd+U: Open Upload Modal (Disabled when in showcase mode)
-      if (isCmdOrCtrl && e.key.toLowerCase() === "u") {
-        e.preventDefault();
-        if (!isShowcaseMode) {
-          setIsUploadOpen(true);
-        }
-      }
     };
 
     window.addEventListener("keydown", handleGlobalShortcuts);
     return () => window.removeEventListener("keydown", handleGlobalShortcuts);
-  }, [isShowcaseMode]);
+  }, []);
 
   const handleDocumentDeleted = (deletedDocId: string) => {
     setDocuments((prev) => prev.filter((d) => d.doc_id !== deletedDocId));

@@ -6,7 +6,6 @@ import {
   Search,
   Layers,
   FileText,
-  Plus,
   PanelLeftClose,
   PanelLeftOpen,
   ArrowRight,
@@ -33,7 +32,7 @@ interface CommandPaletteProps {
   documents: DocumentItem[];
   selectedDoc: DocumentItem | null;
   onSelectDoc: (doc: DocumentItem | null) => void;
-  onOpenUpload: () => void;
+  onOpenUpload?: () => void;
   onToggleSidebar: () => void;
   isSidebarCollapsed: boolean;
   onSelectInquiry: (queryText: string) => void;
@@ -52,7 +51,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   isSidebarCollapsed,
   onSelectInquiry,
   onClearChat,
-  isShowcaseMode = false,
+  isShowcaseMode = true,
 }) => {
   const [search, setSearch] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -146,22 +145,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
     },
 
     // System actions
-    ...(!isShowcaseMode
-      ? [
-          {
-            id: "sys-upload",
-            category: "System" as const,
-            title: "Upload New Filing PDF",
-            subtitle: "Ingest 10-K, 10-Q or corporate financial statement",
-            icon: <Plus className="h-4 w-4 text-[#E59500]" />,
-            shortcut: "⌘U",
-            onSelect: () => {
-              onOpenUpload();
-              onClose();
-            },
-          },
-        ]
-      : []),
     {
       id: "sys-toggle-sidebar",
       category: "System",

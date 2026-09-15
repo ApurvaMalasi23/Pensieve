@@ -5,7 +5,6 @@ import { DocumentItem } from "@/types/api";
 import { deleteDocument, formatFiscalYear } from "@/lib/api";
 import {
   FileText,
-  Plus,
   Layers,
   Calendar,
   Trash2,
@@ -23,7 +22,7 @@ interface DocumentPanelProps {
   documents: DocumentItem[];
   selectedDoc: DocumentItem | null;
   onSelectDoc: (doc: DocumentItem | null) => void;
-  onOpenUpload: () => void;
+  onOpenUpload?: () => void;
   isLoading: boolean;
   onDocumentDeleted?: (docId: string) => void;
   isCollapsed?: boolean;
@@ -36,11 +35,11 @@ export const DocumentPanel: React.FC<DocumentPanelProps> = ({
   selectedDoc,
   onSelectDoc,
   onOpenUpload,
-  isLoading,
   onDocumentDeleted,
+  isLoading,
   isCollapsed = false,
   onToggleCollapse,
-  isShowcaseMode = false,
+  isShowcaseMode = true,
 }) => {
   const [docToDelete, setDocToDelete] = useState<DocumentItem | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -98,24 +97,13 @@ export const DocumentPanel: React.FC<DocumentPanelProps> = ({
               </button>
             )}
 
-            {/* Quick Upload Button (Omitted in Showcase Mode) */}
-            {!isShowcaseMode ? (
-              <button
-                onClick={onOpenUpload}
-                data-testid="upload-document-button-collapsed"
-                className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#E59500] text-[#0A0B0E] hover:bg-[#F3A712] transition-colors cursor-pointer shadow-sm"
-                title="Upload New Filing PDF (⌘U)"
-              >
-                <Plus className="h-4 w-4 stroke-[2.2]" />
-              </button>
-            ) : (
-              <div
-                className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#E59500]/30 bg-[#E59500]/10 text-[#E59500]"
-                title="Showcase Mode (Fixed Catalog)"
-              >
-                <Layers className="h-4 w-4" />
-              </div>
-            )}
+            {/* Fixed Catalog Indicator */}
+            <div
+              className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#E59500]/30 bg-[#E59500]/10 text-[#E59500]"
+              title="Showcase Mode (Fixed Catalog)"
+            >
+              <Layers className="h-4 w-4" />
+            </div>
 
             <div className="h-px w-6 bg-white/10 my-0.5" />
 
@@ -181,23 +169,12 @@ export const DocumentPanel: React.FC<DocumentPanelProps> = ({
               </span>
             </div>
             <div className="flex items-center gap-1.5">
-              {!isShowcaseMode ? (
-                <button
-                  onClick={onOpenUpload}
-                  data-testid="upload-document-button"
-                  className="inline-flex items-center gap-1.5 rounded-full bg-[#E59500] px-3.5 py-1 text-xs font-medium text-[#0A0B0E] hover:bg-[#F3A712] transition-colors cursor-pointer shadow-sm active:scale-95"
-                >
-                  <Plus className="h-3.5 w-3.5 stroke-[2.2]" />
-                  <span>Upload PDF</span>
-                </button>
-              ) : (
-                <span
-                  data-testid="showcase-catalog-badge"
-                  className="rounded-full bg-[#E59500]/10 border border-[#E59500]/25 px-2.5 py-0.5 text-[10px] font-mono tracking-wider uppercase text-[#E59500]"
-                >
-                  Showcase Catalog
-                </span>
-              )}
+              <span
+                data-testid="showcase-catalog-badge"
+                className="rounded-full bg-[#E59500]/10 border border-[#E59500]/25 px-2.5 py-0.5 text-[10px] font-mono tracking-wider uppercase text-[#E59500]"
+              >
+                Showcase Catalog
+              </span>
               {onToggleCollapse && (
                 <button
                   onClick={onToggleCollapse}
@@ -282,16 +259,10 @@ export const DocumentPanel: React.FC<DocumentPanelProps> = ({
                 className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-white/10 p-6 text-center text-[#8C93A5] mt-4 bg-white/[0.02]"
               >
                 <FileText className="h-6 w-6 text-[#585E70] mb-2 stroke-[1.5]" />
-                <p className="text-xs font-medium text-[#F1F3F9]">No filings yet</p>
-                <p className="text-[11px] text-[#8C93A5] mt-1 mb-4 font-light">
-                  Upload a financial report to begin grounded verification.
+                <p className="text-xs font-medium text-[#F1F3F9]">No filings found</p>
+                <p className="text-[11px] text-[#8C93A5] mt-1 font-light">
+                  Showcase catalog is currently connecting to index.
                 </p>
-                <button
-                  onClick={onOpenUpload}
-                  className="rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs text-[#F1F3F9] hover:bg-white/10 font-medium transition-colors"
-                >
-                  Upload report
-                </button>
               </div>
             ) : (
               filteredDocuments.map((doc) => {
