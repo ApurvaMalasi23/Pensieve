@@ -21,7 +21,7 @@ export const PensieveLogo: React.FC<PensieveLogoProps> = ({
   size = 24,
   className = "",
   strokeWidth = 3,
-  color = "#E59500",
+  color = "#CBB282",
   glow = false,
 }) => {
   return (
@@ -31,7 +31,7 @@ export const PensieveLogo: React.FC<PensieveLogoProps> = ({
       height={size}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={`${glow ? "drop-shadow-[0_0_12px_rgba(229,149,0,0.4)]" : ""} ${className}`}
+      className={`${glow ? "drop-shadow-[0_0_12px_rgba(203,178,130,0.35)]" : ""} ${className}`}
       aria-label="Pensieve Logo"
     >
       {/* Equilateral Triangle */}

@@ -99,7 +99,7 @@ export const DocumentPanel: React.FC<DocumentPanelProps> = ({
 
             {/* Fixed Catalog Indicator */}
             <div
-              className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#E59500]/30 bg-[#E59500]/10 text-[#E59500]"
+              className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#CBB282]/30 bg-[#CBB282]/10 text-[#CBB282]"
               title="Showcase Mode (Fixed Catalog)"
             >
               <Layers className="h-4 w-4" />
@@ -113,8 +113,8 @@ export const DocumentPanel: React.FC<DocumentPanelProps> = ({
               data-testid="filter-all-collapsed"
               className={`flex h-8 w-8 items-center justify-center rounded-lg transition-colors cursor-pointer border ${
                 selectedDoc === null
-                  ? "bg-[#E59500]/15 text-[#E59500] border-[#E59500]/30 shadow-[0_0_12px_rgba(229,149,0,0.18)]"
-                  : "border-transparent text-[#8C93A5] hover:bg-white/[0.06] hover:text-[#F1F3F9]"
+                  ? "bg-[#CBB282]/15 text-[#CBB282] border-[#CBB282]/30 shadow-[0_0_12px_rgba(203,178,130,0.18)]"
+                  : "border-transparent text-[#82807A] hover:bg-white/[0.06] hover:text-[#F7F7F4]"
               }`}
               title="Search all filings (Cross-comparison)"
             >
@@ -133,8 +133,8 @@ export const DocumentPanel: React.FC<DocumentPanelProps> = ({
                     data-testid={`document-item-collapsed-${doc.doc_id}`}
                     className={`flex h-8 w-8 items-center justify-center rounded-lg text-[10px] font-mono font-bold transition-all cursor-pointer border ${
                       isSelected
-                        ? "bg-[#E59500]/20 text-[#E59500] border-[#E59500]/40 shadow-[0_0_12px_rgba(229,149,0,0.22)]"
-                        : "border-white/[0.06] bg-white/[0.02] text-[#8C93A5] hover:bg-white/[0.06] hover:text-[#F1F3F9]"
+                        ? "bg-[#CBB282]/20 text-[#CBB282] border-[#CBB282]/40 shadow-[0_0_12px_rgba(203,178,130,0.22)]"
+                        : "border-white/[0.06] bg-white/[0.02] text-[#82807A] hover:bg-white/[0.06] hover:text-[#F7F7F4]"
                     }`}
                     title={`${doc.company_name} (FY ${doc.fiscal_year})`}
                   >
@@ -156,22 +156,22 @@ export const DocumentPanel: React.FC<DocumentPanelProps> = ({
       ) : (
         <aside
           data-testid="document-panel"
-          className="flex h-full w-full flex-col bg-[#0A0B0E]/92 backdrop-blur-2xl p-4 border-r border-white/[0.05] text-[#F1F3F9]"
+          className="flex h-full w-full flex-col bg-[#0B0B0D]/94 backdrop-blur-2xl p-4 border-r border-white/[0.04] text-[#F7F7F4]"
         >
-          {/* Header & Upload Button */}
-          <div className="flex items-center justify-between border-b border-white/[0.05] pb-3.5">
+          {/* Header & Status */}
+          <div className="flex items-center justify-between border-b border-white/[0.04] pb-3.5">
             <div>
-              <h2 className="text-xs font-semibold tracking-tight text-[#F1F3F9]">
+              <h2 className="font-serif text-[15px] tracking-[0.02em] font-medium text-[#F7F7F4]">
                 Filings Catalog
               </h2>
-              <span className="text-[11px] text-[#8C93A5] font-mono tabular-nums">
-                {documents.length} {documents.length === 1 ? "report" : "reports"} indexed
+              <span className="text-[10px] text-[#82807A] font-mono tracking-wider uppercase tabular-nums">
+                {documents.length} {documents.length === 1 ? "dossier" : "dossiers"} indexed
               </span>
             </div>
             <div className="flex items-center gap-1.5">
               <span
                 data-testid="showcase-catalog-badge"
-                className="rounded-full bg-[#E59500]/10 border border-[#E59500]/25 px-2.5 py-0.5 text-[10px] font-mono tracking-wider uppercase text-[#E59500]"
+                className="rounded-full bg-[#CBB282]/10 border border-[#CBB282]/25 px-2.5 py-0.5 text-[10px] font-mono tracking-wider uppercase text-[#CBB282]"
               >
                 Showcase Catalog
               </span>
@@ -179,7 +179,7 @@ export const DocumentPanel: React.FC<DocumentPanelProps> = ({
                 <button
                   onClick={onToggleCollapse}
                   data-testid="collapse-sidebar-button"
-                  className="rounded-lg p-1.5 text-[#8C93A5] hover:bg-white/[0.06] hover:text-[#F1F3F9] transition-colors cursor-pointer"
+                  className="rounded-lg p-1.5 text-[#82807A] hover:bg-white/[0.06] hover:text-[#F7F7F4] transition-colors cursor-pointer"
                   title="Collapse Sidebar"
                 >
                   <PanelLeftClose className="h-3.5 w-3.5 stroke-[1.8]" />
@@ -191,19 +191,19 @@ export const DocumentPanel: React.FC<DocumentPanelProps> = ({
           {/* Search Box */}
           <div className="pt-3 pb-1">
             <div className="relative flex items-center">
-              <Search className="absolute left-3 h-3.5 w-3.5 text-[#8C93A5]/70 pointer-events-none stroke-[1.5]" />
+              <Search className="absolute left-3 h-3.5 w-3.5 text-[#82807A]/70 pointer-events-none stroke-[1.5]" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search catalog filings..."
                 data-testid="search-catalog-input"
-                className="w-full rounded-xl border border-white/[0.05] bg-white/[0.02] pl-8.5 pr-8 py-1.5 text-xs text-[#F1F3F9] placeholder-[#585E70] transition-all duration-200 focus:border-[#E59500]/40 focus:bg-white/[0.04] focus:shadow-[0_0_16px_rgba(229,149,0,0.12)] outline-none"
+                className="w-full rounded-xl border border-white/[0.05] bg-white/[0.02] pl-8.5 pr-8 py-1.5 text-xs text-[#F7F7F4] placeholder-[#4A4944] transition-all duration-200 focus:border-[#CBB282]/40 focus:bg-white/[0.04] focus:shadow-[0_0_16px_rgba(203,178,130,0.12)] outline-none font-sans"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery("")}
-                  className="absolute right-2.5 text-[#8C93A5] hover:text-[#F1F3F9] p-0.5"
+                  className="absolute right-2.5 text-[#82807A] hover:text-[#F7F7F4] p-0.5"
                 >
                   <X className="h-3 w-3" />
                 </button>
@@ -218,16 +218,16 @@ export const DocumentPanel: React.FC<DocumentPanelProps> = ({
               data-testid="filter-all-documents"
               className={`flex w-full items-center justify-between rounded-xl px-3.5 py-2.5 text-xs transition-all duration-200 cursor-pointer border ${
                 selectedDoc === null
-                  ? "bg-gradient-to-r from-[#E59500]/15 to-[#E59500]/5 text-[#F1F3F9] font-medium border-[#E59500]/30 shadow-[0_0_16px_rgba(229,149,0,0.12),inset_0_1px_0_rgba(255,255,255,0.06)]"
-                  : "border-white/[0.04] bg-white/[0.02] text-[#8C93A5] hover:bg-white/[0.05] hover:text-[#F1F3F9]"
+                  ? "bg-gradient-to-r from-[#CBB282]/15 to-[#CBB282]/5 text-[#F7F7F4] font-medium border-[#CBB282]/30 shadow-[0_0_16px_rgba(203,178,130,0.12),inset_0_1px_0_rgba(255,255,255,0.06)]"
+                  : "border-white/[0.04] bg-white/[0.02] text-[#82807A] hover:bg-white/[0.05] hover:text-[#F7F7F4]"
               }`}
             >
               <span className="flex items-center gap-2.5">
-                <Layers className="h-3.5 w-3.5 text-[#E59500]" />
-                <span>Search all filings</span>
+                <Layers className="h-3.5 w-3.5 text-[#CBB282]" />
+                <span className="tracking-wide">All filings (Cross-compare)</span>
               </span>
               {selectedDoc === null && (
-                <span className="text-[10px] bg-[#E59500]/20 text-[#E59500] px-2 py-0.5 rounded-full font-mono tracking-widest uppercase border border-[#E59500]/30 font-semibold">
+                <span className="text-[10px] bg-[#CBB282]/20 text-[#CBB282] px-2 py-0.5 rounded-full font-mono tracking-widest uppercase border border-[#CBB282]/30 font-semibold">
                   Active
                 </span>
               )}
@@ -250,8 +250,8 @@ export const DocumentPanel: React.FC<DocumentPanelProps> = ({
           {/* Document List */}
           <div className="flex-1 overflow-y-auto space-y-2.5 pr-1">
             {isLoading && documents.length === 0 ? (
-              <div className="py-8 text-center text-xs text-[#8C93A5] animate-skeleton">
-                Loading filings...
+              <div className="py-8 text-center text-xs text-[#8C93A5] animate-skeleton font-serif italic">
+                Chargement des rapports...
               </div>
             ) : documents.length === 0 ? (
               <div
@@ -259,7 +259,7 @@ export const DocumentPanel: React.FC<DocumentPanelProps> = ({
                 className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-white/10 p-6 text-center text-[#8C93A5] mt-4 bg-white/[0.02]"
               >
                 <FileText className="h-6 w-6 text-[#585E70] mb-2 stroke-[1.5]" />
-                <p className="text-xs font-medium text-[#F1F3F9]">No filings found</p>
+                <p className="font-serif text-sm font-medium text-[#F1F3F9]">No filings found</p>
                 <p className="text-[11px] text-[#8C93A5] mt-1 font-light">
                   Showcase catalog is currently connecting to index.
                 </p>
@@ -275,22 +275,22 @@ export const DocumentPanel: React.FC<DocumentPanelProps> = ({
                     data-testid={`document-item-${doc.doc_id.slice(0, 8)}`}
                     className={`group relative cursor-pointer rounded-2xl border p-4 transition-all duration-200 ${
                       isSelected
-                        ? "border-[#E59500]/40 bg-gradient-to-br from-[#1F180E] via-[#14161F] to-[#10121A] shadow-[inset_0_0_24px_rgba(229,149,0,0.08),0_6px_24px_rgba(0,0,0,0.6)]"
-                        : "border-white/[0.05] bg-[#13161F]/60 hover:border-white/[0.12] hover:bg-[#181C28]/80 shadow-[0_4px_16px_rgba(0,0,0,0.3)]"
+                        ? "border-[#CBB282]/40 bg-gradient-to-br from-[#1A1812] via-[#141419] to-[#101014] shadow-[inset_0_0_24px_rgba(203,178,130,0.08),0_6px_24px_rgba(0,0,0,0.6)]"
+                        : "border-white/[0.04] bg-[#121216]/60 hover:border-white/[0.10] hover:bg-[#17181D]/80 shadow-[0_4px_16px_rgba(0,0,0,0.3)]"
                     }`}
                   >
                     {/* Active jewel left blade */}
                     {isSelected && (
-                      <div className="absolute left-0 top-3.5 bottom-3.5 w-1 rounded-r-full bg-[#E59500] shadow-[0_0_10px_#E59500]" />
+                      <div className="absolute left-0 top-3.5 bottom-3.5 w-1 rounded-r-full bg-[#CBB282] shadow-[0_0_10px_#CBB282]" />
                     )}
 
                     <div className="flex items-start justify-between gap-2">
-                      <h4 className="text-xs font-medium text-[#F1F3F9] group-hover:text-[#E59500] transition-colors line-clamp-1">
+                      <h4 className="font-serif text-[13.5px] font-medium text-[#F7F7F4] group-hover:text-[#CBB282] transition-colors line-clamp-1 tracking-[0.01em]">
                         {doc.company_name}
                       </h4>
                       
                       <div className="flex items-center gap-1.5 shrink-0">
-                        <span className="rounded-full bg-white/[0.04] px-2 py-0.5 text-[10px] font-mono text-[#C2C7D4] tabular-nums border border-white/[0.05]">
+                        <span className="rounded-full bg-white/[0.04] px-2 py-0.5 text-[10px] font-mono text-[#CDCBC4] tabular-nums border border-white/[0.05]">
                           {formatFiscalYear(doc.fiscal_year)}
                         </span>
 
@@ -323,11 +323,11 @@ export const DocumentPanel: React.FC<DocumentPanelProps> = ({
                     </div>
 
                     {/* Refined Extraction Risk Indicator (Complication Sub-Dial Style) */}
-                    <div className="mt-2.5 pt-2 border-t border-white/[0.05] flex items-center justify-between text-[11px]">
+                    <div className="mt-2.5 pt-2 border-t border-white/[0.04] flex items-center justify-between text-[11px]">
                       {doc.table_chunks_flagged > 0 ? (
                         <span
                           data-testid={`flagged-indicator-${doc.doc_id.slice(0, 8)}`}
-                          className="inline-flex items-center gap-1.5 text-[#F59E0B] font-mono text-[10px] tabular-nums"
+                          className="inline-flex items-center gap-1.5 text-[#D4A373] font-mono text-[10px] tabular-nums"
                           title={`${doc.table_chunks_flagged} of ${doc.table_chunks} tables flagged during extraction.`}
                         >
                           <ShieldAlert className="h-3 w-3 shrink-0 stroke-[1.8]" />
@@ -336,7 +336,7 @@ export const DocumentPanel: React.FC<DocumentPanelProps> = ({
                           </span>
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1.5 text-[#10B981] font-mono text-[10px] tabular-nums">
+                        <span className="inline-flex items-center gap-1.5 text-[#52B788] font-mono text-[10px] tabular-nums">
                           <Check className="h-3 w-3 shrink-0 stroke-[2]" />
                           <span>All {doc.table_chunks} tables clean</span>
                         </span>
@@ -349,29 +349,29 @@ export const DocumentPanel: React.FC<DocumentPanelProps> = ({
           </div>
 
         {/* Scope Footer */}
-        <div className="border-t border-white/8 pt-3 text-[11px] text-[#8C93A5]">
+        <div className="border-t border-white/[0.06] pt-3 text-[11px] text-[#82807A]">
           {selectedDoc ? (
             <div className="flex items-center justify-between">
               <span className="truncate">
-                Scoped: <strong className="text-[#F1F3F9] font-medium">{selectedDoc.company_name}</strong>
+                Scoped: <strong className="text-[#F7F7F4] font-medium">{selectedDoc.company_name}</strong>
               </span>
               <button
                 onClick={() => onSelectDoc(null)}
-                className="text-[#E59500] hover:underline shrink-0 ml-1 cursor-pointer font-medium"
+                className="text-[#CBB282] hover:underline shrink-0 ml-1 cursor-pointer font-medium"
               >
                 Clear
               </button>
             </div>
           ) : (
-            <span className="text-[#8C93A5]/80">Cross-document catalog scope</span>
+            <span className="text-[#82807A]/80">Cross-document catalog scope</span>
           )}
 
           {isShowcaseMode && (
             <div
               data-testid="showcase-corpus-notice"
-              className="mt-2.5 pt-2.5 border-t border-white/6 text-[10px] text-[#8C93A5]/75 leading-relaxed"
+              className="mt-2.5 pt-2.5 border-t border-white/[0.04] text-[10px] text-[#82807A]/75 leading-relaxed"
             >
-              <span className="text-[#E59500] font-medium">Fixed Demo Catalog:</span>{" "}
+              <span className="text-[#CBB282] font-medium">Fixed Demo Catalog:</span>{" "}
               Pre-ingested 5-filing corporate corpus. Live PDF upload and deletion are disabled in this public deployment.
             </div>
           )}

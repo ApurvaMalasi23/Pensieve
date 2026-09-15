@@ -52,30 +52,30 @@ export const CitationChip: React.FC<CitationChipProps> = ({ citation, onClick })
         data-testid={`citation-chip-${citation.marker.replace(/[^a-zA-Z0-9]/g, "")}`}
         className={`group inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs transition-all cursor-pointer select-none ${
           isFlagged
-            ? "border-[#E88C4B]/35 bg-[#E88C4B]/10 text-[#E88C4B] hover:bg-[#E88C4B]/18"
+            ? "border-[#D4A373]/35 bg-[#D4A373]/10 text-[#D4A373] hover:bg-[#D4A373]/18"
             : isOpen
-            ? "border-[#E59500]/45 bg-[#181C28] text-[#F1F3F9] shadow-[0_0_16px_rgba(229,149,0,0.18)]"
-            : "border-white/8 bg-[#13161F] text-[#F1F3F9] hover:bg-[#181C28] hover:border-white/16"
+            ? "border-[#CBB282]/45 bg-[#17181D] text-[#F7F7F4] shadow-[0_0_16px_rgba(203,178,130,0.18)]"
+            : "border-white/8 bg-[#121216] text-[#F7F7F4] hover:bg-[#17181D] hover:border-white/16"
         }`}
         title="Hover for instant source excerpt or click to open full table modal"
       >
-        <span className="font-mono text-[#E59500] font-semibold text-[11px]">{citation.marker}</span>
-        <span className="font-normal text-[#F1F3F9] truncate max-w-[170px] text-[11.5px]">
+        <span className="font-mono text-[#CBB282] font-semibold text-[11px]">{citation.marker}</span>
+        <span className="font-normal text-[#F7F7F4] truncate max-w-[170px] text-[11.5px]">
           {citation.company_name || citation.source_filename.replace(/\.pdf$/i, "")}
         </span>
         {citation.fiscal_year && (
-          <span className="text-[10px] text-[#8C93A5] tabular-nums font-mono">{formatFiscalYear(citation.fiscal_year)}</span>
+          <span className="text-[10px] text-[#82807A] tabular-nums font-mono">{formatFiscalYear(citation.fiscal_year)}</span>
         )}
-        <span className="text-[10px] text-[#8C93A5] tabular-nums font-mono">p.{citation.page_start}</span>
+        <span className="text-[10px] text-[#82807A] tabular-nums font-mono">p.{citation.page_start}</span>
 
         {isFlagged ? (
-          <span className="inline-flex items-center gap-1 rounded bg-[#E88C4B]/20 px-1 py-0.2 text-[10px] font-medium text-[#E88C4B]">
+          <span className="inline-flex items-center gap-1 rounded bg-[#D4A373]/20 px-1 py-0.2 text-[10px] font-medium text-[#D4A373]">
             <ShieldAlert className="h-2.5 w-2.5 stroke-[1.8]" /> Flagged
           </span>
         ) : isTable ? (
-          <Table className="h-3 w-3 text-[#8C93A5] stroke-[1.5]" />
+          <Table className="h-3 w-3 text-[#82807A] stroke-[1.5]" />
         ) : (
-          <FileText className="h-3 w-3 text-[#8C93A5] stroke-[1.5]" />
+          <FileText className="h-3 w-3 text-[#82807A] stroke-[1.5]" />
         )}
       </button>
 
@@ -87,14 +87,14 @@ export const CitationChip: React.FC<CitationChipProps> = ({ citation, onClick })
         >
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
-              <span className="font-mono text-[#E59500] font-bold text-xs">
+              <span className="font-mono text-[#CBB282] font-bold text-xs">
                 {citation.marker}
               </span>
               <div>
-                <span className="font-medium text-xs text-[#F1F3F9] block leading-tight">
+                <span className="font-medium text-xs text-[#F7F7F4] block leading-tight">
                   {citation.company_name || citation.source_filename}
                 </span>
-                <div className="text-[10px] text-[#8C93A5] flex items-center gap-1.5 font-mono">
+                <div className="text-[10px] text-[#82807A] flex items-center gap-1.5 font-mono">
                   <span>p.{citation.page_start}</span>
                   {citation.table_id && <span>• {citation.table_id}</span>}
                 </div>
@@ -103,11 +103,11 @@ export const CitationChip: React.FC<CitationChipProps> = ({ citation, onClick })
 
             {/* Type badge */}
             {isTable ? (
-              <span className="inline-flex items-center gap-1 rounded bg-[#E59500]/10 border border-[#E59500]/20 px-1.5 py-0.5 text-[10px] font-mono text-[#E59500]">
+              <span className="inline-flex items-center gap-1 rounded bg-[#CBB282]/10 border border-[#CBB282]/20 px-1.5 py-0.5 text-[10px] font-mono text-[#CBB282]">
                 <Table className="h-2.5 w-2.5" /> Table
               </span>
             ) : (
-              <span className="inline-flex items-center gap-1 rounded bg-white/6 border border-white/6 px-1.5 py-0.5 text-[10px] font-mono text-[#8C93A5]">
+              <span className="inline-flex items-center gap-1 rounded bg-white/6 border border-white/6 px-1.5 py-0.5 text-[10px] font-mono text-[#82807A]">
                 <FileText className="h-2.5 w-2.5" /> Narrative
               </span>
             )}
@@ -115,7 +115,7 @@ export const CitationChip: React.FC<CitationChipProps> = ({ citation, onClick })
 
           {/* Anomaly banner if flagged */}
           {isFlagged && (
-            <div className="mb-2 flex items-center gap-1.5 rounded-lg border border-[#E88C4B]/30 bg-[#E88C4B]/10 px-2 py-1 text-[10px] text-[#E88C4B]">
+            <div className="mb-2 flex items-center gap-1.5 rounded-lg border border-[#D4A373]/30 bg-[#D4A373]/10 px-2 py-1 text-[10px] text-[#D4A373]">
               <ShieldAlert className="h-3 w-3 shrink-0" />
               <span className="font-mono">
                 {citation.risk_reasons?.[0] || "Flagged OCR / structure irregularity."}
@@ -124,7 +124,7 @@ export const CitationChip: React.FC<CitationChipProps> = ({ citation, onClick })
           )}
 
           {/* Clean Source Excerpt Snippet */}
-          <div className="mb-3 max-h-32 overflow-y-auto rounded-lg bg-[#13161F] border border-white/6 p-2.5 text-[11px] font-mono leading-relaxed text-[#C2C7D4] scrollbar-thin">
+          <div className="mb-3 max-h-32 overflow-y-auto rounded-lg bg-[#121216] border border-white/6 p-2.5 text-[11px] font-mono leading-relaxed text-[#CDCBC4] scrollbar-thin">
             <p className="whitespace-pre-wrap line-clamp-4 select-text">
               {citation.excerpt.trim()}
             </p>
@@ -136,7 +136,7 @@ export const CitationChip: React.FC<CitationChipProps> = ({ citation, onClick })
               setIsOpen(false);
               onClick(citation);
             }}
-            className="flex w-full items-center justify-between rounded-lg bg-white/4 hover:bg-[#E59500]/15 hover:text-[#E59500] border border-white/6 hover:border-[#E59500]/30 px-2.5 py-1.5 text-[11px] text-[#8C93A5] transition-all cursor-pointer"
+            className="flex w-full items-center justify-between rounded-lg bg-white/4 hover:bg-[#CBB282]/15 hover:text-[#CBB282] border border-white/6 hover:border-[#CBB282]/30 px-2.5 py-1.5 text-[11px] text-[#82807A] transition-all cursor-pointer"
           >
             <span className="flex items-center gap-1.5 font-medium">
               <ExternalLink className="h-3 w-3" /> Inspect full table & bounding box

@@ -75,7 +75,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       category: "Scope",
       title: "All Ingested Filings",
       subtitle: `Cross-comparison scope (${documents.length} filings indexed)`,
-      icon: <Layers className="h-4 w-4 text-[#E59500]" />,
+      icon: <Layers className="h-4 w-4 text-[#CBB282]" />,
       shortcut: "Scope",
       onSelect: () => {
         onSelectDoc(null);
@@ -100,7 +100,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       category: "Inquiry",
       title: "Narrative Disclosures & Lending Activities",
       subtitle: "What are Republic Bancorp's primary lending activities?",
-      icon: <FileText className="h-4 w-4 text-[#E59500]" />,
+      icon: <FileText className="h-4 w-4 text-[#CBB282]" />,
       shortcut: "Inquiry",
       onSelect: () => {
         onSelectInquiry("What are Republic Bancorp's primary lending activities?");
@@ -112,7 +112,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       category: "Inquiry",
       title: "Numeric Grounding: Traditional Bank Deposits",
       subtitle: "What were total traditional bank deposits as of December 31, 2024?",
-      icon: <TrendingUp className="h-4 w-4 text-[#10B981]" />,
+      icon: <TrendingUp className="h-4 w-4 text-[#52B788]" />,
       shortcut: "Inquiry",
       onSelect: () => {
         onSelectInquiry("What were total traditional bank deposits as of December 31, 2024?");
@@ -124,7 +124,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       category: "Inquiry",
       title: "Extraction Audit: OCR Flags & Rate Sensitivity",
       subtitle: "What is the impact of a 400 basis point rate change on net interest income?",
-      icon: <ShieldAlert className="h-4 w-4 text-[#F59E0B]" />,
+      icon: <ShieldAlert className="h-4 w-4 text-[#D4A373]" />,
       shortcut: "Inquiry",
       onSelect: () => {
         onSelectInquiry("What is the impact of a 400 basis point rate change on net interest income?");
@@ -136,7 +136,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       category: "Inquiry",
       title: "Cross-Entity Comparison: Revenue & Net Income",
       subtitle: "Compare total revenue or income of Republic Bancorp in 2024 and Lux Industries in 2025-26",
-      icon: <Layers className="h-4 w-4 text-[#E59500]" />,
+      icon: <Layers className="h-4 w-4 text-[#CBB282]" />,
       shortcut: "Inquiry",
       onSelect: () => {
         onSelectInquiry("Compare total revenue or income of Republic Bancorp in 2024 and Lux Industries in 2025-26");
@@ -273,7 +273,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                   onMouseEnter={() => setSelectedIndex(idx)}
                   className={`group flex items-center justify-between gap-3 rounded-xl px-3 py-2.5 text-xs transition-all cursor-pointer ${
                     isSelected
-                      ? "bg-[#13161F] border border-[#E59500]/30 shadow-[0_0_16px_rgba(229,149,0,0.12)]"
+                      ? "bg-[#121216] border border-[#CBB282]/30 shadow-[0_0_16px_rgba(203,178,130,0.12)]"
                       : "border border-transparent hover:bg-white/[0.03]"
                   }`}
                 >
@@ -281,8 +281,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                     <div
                       className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border transition-colors ${
                         isSelected
-                          ? "bg-[#E59500]/15 border-[#E59500]/30 text-[#E59500]"
-                          : "bg-white/4 border-white/6 text-[#8C93A5]"
+                          ? "bg-[#CBB282]/15 border-[#CBB282]/30 text-[#CBB282]"
+                          : "bg-white/4 border-white/6 text-[#82807A]"
                       }`}
                     >
                       {item.icon}
@@ -290,15 +290,15 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
                     <div className="min-w-0">
                       <div className="flex items-center gap-2">
-                        <span className="font-medium text-[#F1F3F9] truncate">
+                        <span className="font-medium text-[#F7F7F4] truncate">
                           {item.title}
                         </span>
-                        <span className="text-[10px] uppercase font-mono tracking-wider px-1.5 py-0.2 rounded bg-white/6 text-[#8C93A5]">
+                        <span className="text-[10px] uppercase font-mono tracking-wider px-1.5 py-0.2 rounded bg-white/6 text-[#82807A]">
                           {item.category}
                         </span>
                       </div>
                       {item.subtitle && (
-                        <p className="text-[11px] text-[#8C93A5] truncate mt-0.5 font-sans">
+                        <p className="text-[11px] text-[#82807A] truncate mt-0.5 font-sans">
                           {item.subtitle}
                         </p>
                       )}
@@ -307,12 +307,12 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
                   <div className="flex items-center gap-2 shrink-0">
                     {item.shortcut && (
-                      <kbd className="hidden sm:inline-block rounded bg-white/6 border border-white/8 px-1.5 py-0.5 text-[10px] font-mono text-[#8C93A5]">
+                      <kbd className="hidden sm:inline-block rounded bg-white/6 border border-white/8 px-1.5 py-0.5 text-[10px] font-mono text-[#82807A]">
                         {item.shortcut}
                       </kbd>
                     )}
                     {isSelected && (
-                      <span className="text-[#E59500] flex items-center gap-1 text-[10px] font-mono">
+                      <span className="text-[#CBB282] flex items-center gap-1 text-[10px] font-mono">
                         <CornerDownLeft className="h-3 w-3" /> Select
                       </span>
                     )}

@@ -51,7 +51,7 @@ export const CitationModal: React.FC<CitationModalProps> = ({ citation, onClose 
             </span>
             <div>
               <div className="flex items-center gap-2">
-                <h3 id="citation-title" className="font-medium text-[#F1F3F9] text-sm md:text-base">
+                <h3 id="citation-title" className="font-serif font-medium text-[#F1F3F9] text-base md:text-lg tracking-[0.01em]">
                   {citation.company_name || "Document Source"}
                 </h3>
                 {citation.fiscal_year && (

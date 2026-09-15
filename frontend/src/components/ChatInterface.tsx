@@ -368,12 +368,12 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
   };
 
   return (
-    <div className="flex h-full flex-col bg-[#0A0B0E] text-[#F1F3F9]">
+    <div className="flex h-full flex-col bg-[#0B0B0D] text-[#F7F7F4]">
       {/* Backend Disconnected Alert Banner */}
       {!isBackendConnected && (
         <div
           data-testid="backend-error-banner"
-          className="flex items-center gap-2.5 border-b border-[#EF4444]/30 bg-[#EF4444]/10 px-6 py-2.5 text-xs text-[#EF4444]"
+          className="flex items-center gap-2.5 border-b border-[#E06D6D]/30 bg-[#E06D6D]/10 px-6 py-2.5 text-xs text-[#E06D6D]"
         >
           <WifiOff className="h-4 w-4 shrink-0" />
           <span>
@@ -383,30 +383,30 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
       )}
 
       {/* Scope Subheader */}
-      <div className="flex items-center justify-between border-b border-white/[0.05] bg-[#0A0B0E]/70 backdrop-blur-md px-6 py-2 text-xs text-[#8C93A5]">
+      <div className="flex items-center justify-between border-b border-white/[0.04] bg-[#0B0B0D]/70 backdrop-blur-md px-6 py-2 text-xs text-[#82807A]">
         <div className="flex items-center gap-2">
           {messages.length > 0 && (
             <button
               type="button"
               data-testid="back-to-default-questions-button"
               onClick={handleBackToDefaultQuestions}
-              className="group flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium text-[#E59500] hover:text-white bg-[#E59500]/10 hover:bg-[#E59500]/20 border border-[#E59500]/25 transition-all duration-150 cursor-pointer shadow-xs mr-1"
+              className="group flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium text-[#CBB282] hover:text-white bg-[#CBB282]/10 hover:bg-[#CBB282]/20 border border-[#CBB282]/25 transition-all duration-150 cursor-pointer shadow-xs mr-1"
               title="Return to default questions"
             >
-              <ArrowLeft className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-0.5 text-[#E59500]" />
+              <ArrowLeft className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-0.5 text-[#CBB282]" />
               <span className="hidden sm:inline">Back to questions</span>
               <span className="sm:hidden">Back</span>
             </button>
           )}
-          <Layers className="h-3.5 w-3.5 text-[#E59500]" />
+          <Layers className="h-3.5 w-3.5 text-[#CBB282]" />
           <span>
             Scope:{" "}
             {selectedDoc ? (
-              <span className="font-medium text-[#F1F3F9]">
+              <span className="font-medium text-[#F7F7F4]">
                 {selectedDoc.company_name} ({formatFiscalYear(selectedDoc.fiscal_year)})
               </span>
             ) : (
-              <span className="font-medium text-[#F1F3F9]">
+              <span className="font-medium text-[#F7F7F4]">
                 All ingested filings (Cross-comparison enabled)
               </span>
             )}
@@ -430,54 +430,54 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
               {/* Atmospheric Cinematic Radial Aura */}
               <div 
                 aria-hidden="true"
-                className="pointer-events-none absolute -top-12 left-1/2 -translate-x-1/2 h-[480px] w-[800px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(229,149,0,0.18),rgba(229,149,0,0.04)_45%,transparent_70%)] blur-3xl -z-10" 
+                className="pointer-events-none absolute -top-12 left-1/2 -translate-x-1/2 h-[480px] w-[800px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(203,178,130,0.12),rgba(203,178,130,0.02)_45%,transparent_70%)] blur-3xl -z-10" 
               />
 
               {/* Jony Ive Ambient Watermark (Etched faintly in canvas background) */}
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.035] -z-10 select-none"
+                className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.03] -z-10 select-none"
               >
-                <PensieveLogo size={520} strokeWidth={1.2} color="#E59500" />
+                <PensieveLogo size={520} strokeWidth={1.2} color="#CBB282" />
               </div>
 
-              {/* Apple-style sleek kicker with pulsating micro-beacon */}
-              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-[#E59500]/25 bg-[#13161F]/85 backdrop-blur-xl mb-5 shadow-[0_0_30px_rgba(229,149,0,0.16)]">
+              {/* French Haute Kicker */}
+              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-[#CBB282]/25 bg-[#121216]/85 backdrop-blur-xl mb-5 shadow-[0_0_30px_rgba(203,178,130,0.12)]">
                 <span className="relative flex h-1.5 w-1.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#E59500] opacity-75" />
-                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#E59500]" />
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#CBB282] opacity-75" />
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#CBB282]" />
                 </span>
-                <span className="font-mono text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-semibold text-[#E59500]">
+                <span className="font-mono text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-semibold text-[#CBB282]">
                   Pensieve Intelligence
                 </span>
                 <span className="text-white/20 text-xs">•</span>
-                <span className="text-[10px] sm:text-[11px] tracking-wider uppercase text-[#8C93A5] font-mono">
+                <span className="text-[10px] sm:text-[11px] tracking-wider uppercase text-[#82807A] font-mono">
                   Ground Truth Engine
                 </span>
               </div>
 
-              {/* Grand Keynote Display Headline (Calibrated Golden Proportion) */}
-              <h1 className="font-sans text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-[-0.04em] leading-[0.98] bg-gradient-to-b from-[#FFFFFF] via-[#F1F3F9] to-[#8C93A5] bg-clip-text text-transparent drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)]">
-                Ask Pensieve.
+              {/* French Editorial Display Headline */}
+              <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-normal tracking-[-0.02em] leading-[0.96] text-[#F1F3F9] drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)]">
+                Ask <span className="italic font-light text-[#FFFFFF]">Pensieve.</span>
               </h1>
 
               {/* Authoritative Supporting Copy with Optical Golden Ratio */}
-              <p className="mt-4 text-sm sm:text-base text-[#8C93A5] max-w-xl leading-relaxed font-normal tracking-[-0.01em] font-sans">
+              <p className="mt-4 text-sm sm:text-base text-[#8C93A5] max-w-xl leading-relaxed font-light tracking-[0.01em] font-sans">
                 Interrogate corporate filings with <span className="text-[#F1F3F9] font-medium">cell-level mathematical verification</span> and unbreakable source provenance.
               </p>
 
               {/* Bespoke Inquiry Ledger: Smoked Crystal Slab Architecture */}
               <div className="mt-9 w-full text-left">
                 <div className="flex items-center justify-between mb-2.5 px-1">
-                  <span className="text-[11px] font-mono uppercase tracking-widest text-[#8C93A5]">
-                    {selectedDoc ? `${selectedDoc.company_name} Inquiries` : "Recommended Inquiries"}
+                  <span className="text-[10px] font-mono uppercase tracking-[0.24em] text-[#8C93A5]">
+                    {selectedDoc ? `${selectedDoc.company_name} · Inquiries` : "Curated Dossier Inquiries"}
                   </span>
                   <span className="text-[10px] font-mono text-[#585E70] uppercase tracking-wider">
                     Click to query
                   </span>
                 </div>
 
-                <div className="rounded-2xl border border-white/[0.06] bg-[#13161F]/60 backdrop-blur-2xl divide-y divide-white/[0.04] shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.05)] overflow-hidden">
+                <div className="rounded-2xl border border-white/[0.05] bg-[#121216]/60 backdrop-blur-2xl divide-y divide-white/[0.03] shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.04)] overflow-hidden">
                   {currentInquiries.map((item) => (
                     <button
                       key={item.index}
@@ -486,29 +486,29 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
                         setInputQuery(item.text);
                         inputRef.current?.focus();
                       }}
-                      className="group relative flex w-full items-start gap-4 p-4 text-left transition-all duration-200 hover:bg-white/[0.03] cursor-pointer"
+                      className="group relative flex w-full items-start gap-4 p-4 text-left transition-all duration-200 hover:bg-white/[0.02] cursor-pointer"
                     >
-                      {/* Interactive gold hairline blade reveal */}
-                      <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-[#E59500] opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-[0_0_8px_#E59500]" />
+                      {/* Interactive champagne hairline blade reveal */}
+                      <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-[#CBB282] opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-[0_0_8px_#CBB282]" />
                       
-                      <span className="font-mono text-[11px] sm:text-[11.5px] font-semibold text-[#E59500]/80 group-hover:text-[#E59500] pt-0.5 tabular-nums shrink-0 transition-colors">
+                      <span className="font-mono text-[11px] sm:text-[11.5px] font-semibold text-[#CBB282]/80 group-hover:text-[#CBB282] pt-0.5 tabular-nums shrink-0 transition-colors">
                         {item.index}
                       </span>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1">
-                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium tracking-wide bg-white/[0.04] text-[#C2C7D4] group-hover:text-[#E59500] group-hover:bg-[#E59500]/10 transition-colors border border-white/[0.04]">
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium tracking-wide bg-white/[0.04] text-[#CDCBC4] group-hover:text-[#CBB282] group-hover:bg-[#CBB282]/10 transition-colors border border-white/[0.04]">
                             {item.label}
                           </span>
                           <span className="text-white/10 text-[9px]">•</span>
-                          <span className="text-[10px] font-mono text-[#585E70] truncate">
+                          <span className="text-[10px] font-mono text-[#4A4944] truncate">
                             {item.meta}
                           </span>
                         </div>
-                        <p className="text-[13px] sm:text-sm text-[#C2C7D4] group-hover:text-white transition-colors leading-relaxed font-normal">
+                        <p className="text-[13px] sm:text-sm text-[#CDCBC4] group-hover:text-white transition-colors leading-relaxed font-normal">
                           {item.text}
                         </p>
                       </div>
-                      <ArrowRight className="h-3.5 w-3.5 text-[#585E70] group-hover:text-[#E59500] group-hover:translate-x-1 transition-all mt-1 shrink-0" />
+                      <ArrowRight className="h-3.5 w-3.5 text-[#4A4944] group-hover:text-[#CBB282] group-hover:translate-x-1 transition-all mt-1 shrink-0" />
                     </button>
                   ))}
                 </div>
@@ -531,10 +531,10 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
       </div>
 
       {/* Monolithic Floating Input Dock */}
-      <div className="relative px-4 pb-6 pt-2 bg-gradient-to-t from-[#0A0B0E] via-[#0A0B0E]/95 to-transparent">
+      <div className="relative px-4 pb-6 pt-2 bg-gradient-to-t from-[#0B0B0D] via-[#0B0B0D]/95 to-transparent">
         <form
           onSubmit={handleSubmit}
-          className="relative mx-auto flex max-w-3xl items-end rounded-2xl border border-white/[0.08] bg-[#13161F]/85 backdrop-blur-2xl px-4 py-3.5 shadow-[0_20px_50px_rgba(0,0,0,0.8),inset_0_1px_0_rgba(255,255,255,0.08)] transition-all duration-300 focus-within:border-[#E59500]/40 focus-within:shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_24px_rgba(229,149,0,0.14),inset_0_1px_0_rgba(255,255,255,0.12)]"
+          className="relative mx-auto flex max-w-3xl items-end rounded-2xl border border-white/[0.06] bg-[#121216]/85 backdrop-blur-2xl px-4 py-3.5 shadow-[0_20px_50px_rgba(0,0,0,0.8),inset_0_1px_0_rgba(255,255,255,0.06)] transition-all duration-300 focus-within:border-[#CBB282]/40 focus-within:shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_24px_rgba(203,178,130,0.12),inset_0_1px_0_rgba(255,255,255,0.10)]"
         >
           <textarea
             ref={inputRef}
@@ -547,7 +547,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
                 ? `Query ${selectedDoc.company_name} filings (Press / to focus)...`
                 : "Ask a financial question or cross-compare filings (Press / to focus)..."
             }
-            className="flex-1 resize-none bg-transparent text-sm text-[#F1F3F9] placeholder-[#585E70] border-0 outline-none focus:outline-none focus:ring-0 ring-0 max-h-32 leading-relaxed font-light"
+            className="flex-1 resize-none bg-transparent text-sm text-[#F7F7F4] placeholder-[#4A4944] border-0 outline-none focus:outline-none focus:ring-0 ring-0 max-h-32 leading-relaxed font-light"
           />
           <button
             type="submit"
@@ -555,8 +555,8 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
             data-testid="send-query-button"
             className={`ml-3 flex h-8.5 w-8.5 shrink-0 items-center justify-center rounded-xl transition-all duration-200 active:scale-95 ${
               inputQuery.trim() && !isLoading
-                ? "bg-[#E59500] text-[#0A0B0E] hover:bg-[#F3A712] shadow-[0_0_16px_rgba(229,149,0,0.35)] cursor-pointer"
-                : "bg-white/[0.04] text-[#585E70] cursor-not-allowed border border-white/[0.05]"
+                ? "bg-[#CBB282] text-[#0B0B0D] hover:bg-[#D9C49A] shadow-[0_0_16px_rgba(203,178,130,0.25)] cursor-pointer"
+                : "bg-white/[0.04] text-[#4A4944] cursor-not-allowed border border-white/[0.04]"
             }`}
             title="Submit query"
           >
@@ -570,7 +570,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
         {isShowcaseMode && (
           <div
             data-testid="showcase-input-notice"
-            className="mt-2.5 text-center text-[10px] text-[#8C93A5]/70 font-mono tracking-wider"
+            className="mt-2.5 text-center text-[10px] text-[#82807A]/70 font-mono tracking-wider"
           >
             Showcase Catalog: Fixed corporate corpus • Cell-level numeric grounding & verification active
           </div>

@@ -26,19 +26,19 @@ export const VerificationBadge: React.FC<VerificationBadgeProps> = ({
     return (
       <div
         data-testid="verification-badge-verified"
-        className={`animate-settle rounded-2xl border border-[#10B981]/25 bg-gradient-to-br from-[#0D1C16]/70 via-[#0A1611]/50 to-[#08100C]/40 backdrop-blur-xl p-4 text-[#10B981] shadow-[0_8px_24px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(16,185,129,0.12)] transition-all ${className}`}
+        className={`animate-settle rounded-2xl border border-[#52B788]/25 bg-gradient-to-br from-[#12231A]/70 via-[#0E1A13]/50 to-[#0A120D]/40 backdrop-blur-xl p-4 text-[#52B788] shadow-[0_8px_24px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(82,183,136,0.12)] transition-all ${className}`}
       >
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-start gap-2.5">
-            <div className="flex h-4.5 w-4.5 shrink-0 items-center justify-center text-[#10B981] mt-0.5">
+            <div className="flex h-4.5 w-4.5 shrink-0 items-center justify-center text-[#52B788] mt-0.5">
               <CheckCircle2 className="h-4.5 w-4.5 stroke-[1.8]" />
             </div>
             <div className="flex flex-col text-xs leading-relaxed">
-              <span className="font-semibold text-[#F1F3F9] tracking-tight">
+              <span className="font-semibold text-[#F7F7F4] tracking-tight">
                 Verified Against Source Table
               </span>
               {!compact && (
-                <span className="text-[#10B981]/85 text-[11px] mt-0.5 font-light">
+                <span className="text-[#52B788]/85 text-[11px] mt-0.5 font-light">
                   Figures matched cell-for-cell against extracted financial table cells.
                 </span>
               )}
@@ -49,7 +49,7 @@ export const VerificationBadge: React.FC<VerificationBadgeProps> = ({
             <button
               onClick={() => setIsExpanded(!isExpanded)}
               data-testid="inspect-proof-button"
-              className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-mono text-[#10B981] bg-[#10B981]/10 hover:bg-[#10B981]/20 transition-all cursor-pointer shrink-0 border border-[#10B981]/25 shadow-xs"
+              className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-mono text-[#52B788] bg-[#52B788]/10 hover:bg-[#52B788]/20 transition-all cursor-pointer shrink-0 border border-[#52B788]/25 shadow-xs"
             >
               <Cpu className="h-3 w-3" />
               <span>{isExpanded ? "Hide Proof" : "Inspect Proof"}</span>
@@ -107,18 +107,18 @@ export const VerificationBadge: React.FC<VerificationBadgeProps> = ({
     return (
       <div
         data-testid="verification-badge-low-confidence"
-        className={`animate-settle rounded-2xl border border-[#F59E0B]/30 bg-gradient-to-br from-[#1C1408]/70 via-[#160F06]/50 to-[#100B04]/40 backdrop-blur-xl p-4 text-[#F59E0B] shadow-[0_8px_24px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(245,158,11,0.12)] transition-all ${className}`}
+        className={`animate-settle rounded-2xl border border-[#D4A373]/30 bg-gradient-to-br from-[#1F180F]/70 via-[#19130C]/50 to-[#120D08]/40 backdrop-blur-xl p-4 text-[#D4A373] shadow-[0_8px_24px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(212,163,115,0.12)] transition-all ${className}`}
       >
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-start gap-2.5">
-            <div className="flex h-4.5 w-4.5 shrink-0 items-center justify-center text-[#F59E0B] mt-0.5">
+            <div className="flex h-4.5 w-4.5 shrink-0 items-center justify-center text-[#D4A373] mt-0.5">
               <ShieldAlert className="h-4.5 w-4.5 stroke-[1.8]" />
             </div>
             <div className="flex flex-col text-xs leading-relaxed max-w-xl">
-              <span className="font-semibold text-[#F1F3F9] tracking-tight">
+              <span className="font-semibold text-[#F7F7F4] tracking-tight">
                 Verified with Table Extraction Warning
               </span>
-              <p className="mt-1 text-[11px] leading-normal text-[#F59E0B] bg-[#0A0B0E]/80 rounded-xl px-3 py-2 border border-[#F59E0B]/20 tabular-nums font-light">
+              <p className="mt-1 text-[11px] leading-normal text-[#D4A373] bg-[#0B0B0D]/80 rounded-xl px-3 py-2 border border-[#D4A373]/20 tabular-nums font-light">
                 {reason || "The cited table was flagged for structural or OCR irregularities. Please verify against original PDF."}
               </p>
             </div>
@@ -128,7 +128,7 @@ export const VerificationBadge: React.FC<VerificationBadgeProps> = ({
             <button
               onClick={() => setIsExpanded(!isExpanded)}
               data-testid="inspect-proof-button"
-              className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-mono text-[#F59E0B] bg-[#F59E0B]/10 hover:bg-[#F59E0B]/20 transition-all cursor-pointer shrink-0 border border-[#F59E0B]/25 shadow-xs"
+              className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-mono text-[#D4A373] bg-[#D4A373]/10 hover:bg-[#D4A373]/20 transition-all cursor-pointer shrink-0 border border-[#D4A373]/25 shadow-xs"
             >
               <Cpu className="h-3 w-3" />
               <span>{isExpanded ? "Hide Audit" : "Inspect Audit"}</span>
@@ -179,18 +179,18 @@ export const VerificationBadge: React.FC<VerificationBadgeProps> = ({
     return (
       <div
         data-testid="verification-badge-unverified"
-        className={`animate-settle rounded-2xl border border-[#EF4444]/30 bg-gradient-to-br from-[#1C0A0A]/70 via-[#160808]/50 to-[#100606]/40 backdrop-blur-xl p-4 text-[#EF4444] shadow-[0_8px_24px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(239,68,68,0.12)] transition-all ${className}`}
+        className={`animate-settle rounded-2xl border border-[#E06D6D]/30 bg-gradient-to-br from-[#1F1010]/70 via-[#180C0C]/50 to-[#120808]/40 backdrop-blur-xl p-4 text-[#E06D6D] shadow-[0_8px_24px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(224,109,109,0.12)] transition-all ${className}`}
       >
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-start gap-2.5">
-            <div className="flex h-4.5 w-4.5 shrink-0 items-center justify-center text-[#EF4444] mt-0.5">
+            <div className="flex h-4.5 w-4.5 shrink-0 items-center justify-center text-[#E06D6D] mt-0.5">
               <AlertOctagon className="h-4.5 w-4.5 stroke-[1.8]" />
             </div>
             <div className="flex flex-col text-xs leading-relaxed max-w-xl">
-              <span className="font-semibold text-[#F1F3F9] tracking-tight">
+              <span className="font-semibold text-[#F7F7F4] tracking-tight">
                 Unverified Numeric Figure
               </span>
-              <p className="mt-1 text-[11px] leading-normal text-[#EF4444]/90 bg-[#0A0B0E]/80 rounded-xl px-3 py-2 border border-[#EF4444]/20 font-light">
+              <p className="mt-1 text-[11px] leading-normal text-[#E06D6D]/90 bg-[#0B0B0D]/80 rounded-xl px-3 py-2 border border-[#E06D6D]/20 font-light">
                 {reason || "This number was not located in any retrieved financial table. Verify against the source document directly before relying on this figure."}
               </p>
             </div>
@@ -200,7 +200,7 @@ export const VerificationBadge: React.FC<VerificationBadgeProps> = ({
             <button
               onClick={() => setIsExpanded(!isExpanded)}
               data-testid="inspect-proof-button"
-              className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-mono text-[#EF4444] bg-[#EF4444]/10 hover:bg-[#EF4444]/20 transition-all cursor-pointer shrink-0 border border-[#EF4444]/25 shadow-xs"
+              className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-mono text-[#E06D6D] bg-[#E06D6D]/10 hover:bg-[#E06D6D]/20 transition-all cursor-pointer shrink-0 border border-[#E06D6D]/25 shadow-xs"
             >
               <Info className="h-3 w-3" />
               <span>{isExpanded ? "Hide Warning" : "Why Unverified?"}</span>

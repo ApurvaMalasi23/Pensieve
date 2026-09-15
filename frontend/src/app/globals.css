@@ -2,40 +2,41 @@
 
 :root {
   color-scheme: dark;
-  /* Palette 2: Natural Titanium & Hermès Amber */
-  --surface-base: #0A0B0E;
-  --surface-raised: #13161F;
-  --surface-elevated: #181C28;
-  --surface-overlay: rgba(10, 11, 14, 0.88);
+  /* Palette: Atelier Vendôme — French Minimalist Haute Palette */
+  --surface-base: #0B0B0D; /* Deep velvety carbon & smoked basalt */
+  --surface-raised: #121216; /* Warm smoked slate */
+  --surface-elevated: #17181D; /* Polished basalt */
+  --surface-overlay: rgba(11, 11, 13, 0.92);
   
-  --ink: #F1F3F9;
-  --ink-secondary: #C2C7D4;
-  --muted: #8C93A5;
-  --muted-dark: #585E70;
+  --ink: #F7F7F4; /* Velvety off-white alabaster */
+  --ink-secondary: #CDCBC4; /* Soft parchment / calcaire */
+  --muted: #82807A; /* Weathered stone */
+  --muted-dark: #4A4944; /* Charcoal graphite */
 
-  --hairline: rgba(255, 255, 255, 0.06);
-  --hairline-subtle: rgba(255, 255, 255, 0.035);
-  --hairline-strong: rgba(255, 255, 255, 0.12);
+  --hairline: rgba(255, 255, 255, 0.05);
+  --hairline-subtle: rgba(255, 255, 255, 0.03);
+  --hairline-strong: rgba(255, 255, 255, 0.09);
 
-  /* Hermès Amber / Saffron Accent */
-  --accent: #E59500;
-  --accent-hover: #F3A712;
-  --accent-muted: #AD7000;
-  --accent-subtle: rgba(229, 149, 0, 0.12);
-  --accent-border: rgba(229, 149, 0, 0.28);
+  /* L'Or Champagne (Pale Brushed Brass & Cognac Silk) */
+  --accent: #CBB282;
+  --accent-hover: #D9C49A;
+  --accent-muted: #96815B;
+  --accent-subtle: rgba(203, 178, 130, 0.09);
+  --accent-border: rgba(203, 178, 130, 0.24);
+  --accent-glow: rgba(203, 178, 130, 0.12);
 
-  /* Verification Semantic Colors: Tourmaline Emerald */
-  --verified-ink: #10B981;
-  --verified-bg: rgba(16, 185, 129, 0.08);
-  --verified-border: rgba(16, 185, 129, 0.22);
+  /* Verification Semantic Colors: Minéral Jade & Doux Ambre */
+  --verified-ink: #52B788;
+  --verified-bg: rgba(82, 183, 136, 0.08);
+  --verified-border: rgba(82, 183, 136, 0.22);
 
-  --caution-ink: #F59E0B;
-  --caution-bg: rgba(245, 158, 11, 0.08);
-  --caution-border: rgba(245, 158, 11, 0.22);
+  --caution-ink: #D4A373;
+  --caution-bg: rgba(212, 163, 115, 0.08);
+  --caution-border: rgba(212, 163, 115, 0.22);
 
-  --unverified-ink: #EF4444;
-  --unverified-bg: rgba(239, 68, 68, 0.08);
-  --unverified-border: rgba(239, 68, 68, 0.22);
+  --unverified-ink: #E06D6D;
+  --unverified-bg: rgba(224, 109, 109, 0.08);
+  --unverified-border: rgba(224, 109, 109, 0.22);
 }
 
 body {
@@ -47,13 +48,28 @@ body {
   letter-spacing: -0.011em;
 }
 
-/* Precision Tech Font System */
+/* French Haute Typographie: Editorial Serif, Precision Grotesk & Mono */
+.font-serif {
+  font-family: var(--font-cormorant), "Cormorant Garamond", Garamond, Georgia, serif;
+  font-feature-settings: "liga" 1, "kern" 1;
+}
+
 .font-sans {
   font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .font-mono {
   font-family: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+}
+
+.editorial-title {
+  font-family: var(--font-cormorant), "Cormorant Garamond", Garamond, Georgia, serif;
+  letter-spacing: -0.015em;
+}
+
+.editorial-caps {
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
 }
 
 /* Tabular lining figures & financial data in JetBrains Mono */

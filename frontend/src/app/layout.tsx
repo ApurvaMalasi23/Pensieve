@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, JetBrains_Mono } from "next/font/google";
+import { Geist, JetBrains_Mono, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -11,6 +11,14 @@ const geistSans = Geist({
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const cormorantGaramond = Cormorant_Garamond({
+  variable: "--font-cormorant",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -31,9 +39,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${jetbrainsMono.variable} dark h-full antialiased`}
+      className={`${geistSans.variable} ${jetbrainsMono.variable} ${cormorantGaramond.variable} dark h-full antialiased`}
     >
-      <body className="h-full bg-[#0A0B0E] text-[#F1F3F9] selection:bg-[#E59500]/25 selection:text-[#E59500]">
+      <body className="h-full bg-[#0B0B0D] text-[#F7F7F4] selection:bg-[#CBB282]/25 selection:text-[#CBB282]">
         {children}
       </body>
     </html>

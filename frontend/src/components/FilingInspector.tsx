@@ -123,7 +123,7 @@ export const FilingInspector: React.FC<FilingInspectorProps> = ({
           </span>
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <h3 className="font-semibold text-[#F1F3F9] text-xs sm:text-sm truncate">
+              <h3 className="font-serif text-sm sm:text-[15px] font-medium text-[#F1F3F9] tracking-[0.01em] truncate">
                 {citation.company_name || "Filing Source"}
               </h3>
               {citation.fiscal_year && (

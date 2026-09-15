@@ -47,20 +47,20 @@ export const Header: React.FC<HeaderProps> = ({
   }, [onHealthStatusChange]);
 
   return (
-    <header className="sticky top-0 z-30 flex h-14 w-full items-center justify-between px-5 sm:px-6 border-b border-white/[0.05] bg-[#0A0B0E]/85 backdrop-blur-2xl shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+    <header className="sticky top-0 z-30 flex h-14 w-full items-center justify-between px-5 sm:px-6 border-b border-white/[0.04] bg-[#0B0B0D]/85 backdrop-blur-2xl shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
       {/* Brand Identity: Jony Ive Precision Lockup */}
       <div className="flex items-center gap-3 sm:gap-4">
         <div className="flex items-center gap-2.5 group cursor-default">
           <div className="relative flex items-center justify-center">
-            <div className="absolute inset-0 rounded-full bg-[#E59500]/20 blur-sm -z-10" />
-            <PensieveLogo size={21} color="#E59500" strokeWidth={3.2} glow />
+            <div className="absolute inset-0 rounded-full bg-[#CBB282]/15 blur-sm -z-10" />
+            <PensieveLogo size={21} color="#CBB282" strokeWidth={3.2} glow />
           </div>
-          <span className="font-sans font-semibold tracking-[0.28em] text-[11px] text-[#F1F3F9] uppercase">
+          <span className="font-serif text-[15px] font-medium tracking-[0.14em] text-[#F7F7F4] uppercase">
             Pensieve
           </span>
         </div>
         <div className="h-3.5 w-px bg-white/[0.08] hidden sm:block" />
-        <span className="text-[11px] text-[#8C93A5] font-light hidden sm:inline tracking-wide font-sans">
+        <span className="text-[12px] text-[#82807A] italic font-serif hidden sm:inline tracking-wide">
           Financial Grounding & Numeric Verification
         </span>
       </div>
@@ -70,9 +70,9 @@ export const Header: React.FC<HeaderProps> = ({
         {isConnected === false ? (
           <div
             data-testid="backend-disconnected-badge"
-            className="flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] text-[#EF4444] bg-[#EF4444]/10 border border-[#EF4444]/20 backdrop-blur-md"
+            className="flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] text-[#E06D6D] bg-[#E06D6D]/10 border border-[#E06D6D]/20 backdrop-blur-md"
           >
-            <WifiOff className="h-3 w-3 text-[#EF4444]" />
+            <WifiOff className="h-3 w-3 text-[#E06D6D]" />
             <span className="font-medium">Backend Disconnected</span>
           </div>
         ) : health ? (
@@ -83,22 +83,22 @@ export const Header: React.FC<HeaderProps> = ({
             <span className="relative flex h-2 w-2">
               <span
                 className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-60 ${
-                  health.status === "ok" ? "bg-[#10B981]" : "bg-[#F59E0B]"
+                  health.status === "ok" ? "bg-[#52B788]" : "bg-[#D4A373]"
                 }`}
               />
               <span
                 className={`relative inline-flex rounded-full h-2 w-2 ${
                   health.status === "ok"
-                    ? "bg-[#10B981] shadow-[0_0_8px_#10B981]"
-                    : "bg-[#F59E0B] shadow-[0_0_8px_#F59E0B]"
+                    ? "bg-[#52B788] shadow-[0_0_8px_#52B788]"
+                    : "bg-[#D4A373] shadow-[0_0_8px_#D4A373]"
                 }`}
               />
             </span>
-            <span className="text-[11px] font-medium text-[#F1F3F9]/90">
+            <span className="text-[11px] font-medium text-[#F7F7F4]/90">
               {health.status === "ok" ? "Operational" : "Degraded"}
             </span>
             <span className="text-white/20 text-[10px] hidden sm:inline">•</span>
-            <span className="text-[11px] text-[#C2C7D4] tabular-nums font-mono hidden sm:inline">
+            <span className="text-[11px] text-[#CDCBC4] tabular-nums font-mono hidden sm:inline">
               {health.points_count.toLocaleString()} Chunks Indexed
             </span>
             {(health.showcase_mode || isShowcaseMode) && (
@@ -106,7 +106,7 @@ export const Header: React.FC<HeaderProps> = ({
                 <span className="text-white/20 text-[10px] hidden md:inline">•</span>
                 <span
                   data-testid="header-showcase-badge"
-                  className="hidden md:inline-flex items-center gap-1 rounded-full bg-[#E59500]/10 border border-[#E59500]/25 px-2.5 py-0.5 text-[10px] font-mono tracking-wider uppercase text-[#E59500]"
+                  className="hidden md:inline-flex items-center gap-1 rounded-full bg-[#CBB282]/10 border border-[#CBB282]/25 px-2.5 py-0.5 text-[10px] font-mono tracking-wider uppercase text-[#CBB282]"
                 >
                   Showcase Demo
                 </span>
@@ -114,7 +114,7 @@ export const Header: React.FC<HeaderProps> = ({
             )}
           </div>
         ) : (
-          <div className="flex items-center gap-2 text-xs text-[#8C93A5]">
+          <div className="flex items-center gap-2 text-xs text-[#82807A]">
             <span className="h-1.5 w-1.5 rounded-full bg-white/30 animate-pulse" />
             <span className="text-[11px]">Connecting...</span>
           </div>
@@ -125,21 +125,21 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             onClick={onOpenCommandPalette}
             data-testid="command-palette-trigger"
-            className="group flex items-center gap-1.5 text-xs text-[#C2C7D4] hover:text-[#F1F3F9] bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.07] hover:border-[#E59500]/40 px-3 py-1 rounded-full transition-all duration-200 cursor-pointer shadow-[0_2px_8px_rgba(0,0,0,0.3)]"
+            className="group flex items-center gap-1.5 text-xs text-[#CDCBC4] hover:text-[#F7F7F4] bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.07] hover:border-[#CBB282]/40 px-3 py-1 rounded-full transition-all duration-200 cursor-pointer shadow-[0_2px_8px_rgba(0,0,0,0.3)]"
             title="Open Command Spotlight (⌘K)"
           >
-            <Search className="h-3 w-3 text-[#E59500] group-hover:scale-105 transition-transform" />
+            <Search className="h-3 w-3 text-[#CBB282] group-hover:scale-105 transition-transform" />
             <span className="hidden sm:inline text-[11px] font-normal">Spotlight</span>
-            <kbd className="font-mono text-[10px] text-[#E59500] font-semibold bg-[#E59500]/10 px-1.5 py-0.5 rounded border border-[#E59500]/20">
+            <kbd className="font-mono text-[10px] text-[#CBB282] font-semibold bg-[#CBB282]/10 px-1.5 py-0.5 rounded border border-[#CBB282]/20">
               ⌘K
             </kbd>
           </button>
         )}
 
         {/* Keyboard shortcut hint */}
-        <div className="hidden lg:flex items-center gap-1.5 text-[10.5px] text-[#8C93A5] bg-white/[0.02] border border-white/[0.05] px-2.5 py-1 rounded-full">
+        <div className="hidden lg:flex items-center gap-1.5 text-[10.5px] text-[#82807A] bg-white/[0.02] border border-white/[0.05] px-2.5 py-1 rounded-full">
           <span>Press</span>
-          <kbd className="font-mono text-[10px] text-[#E59500] font-medium bg-[#E59500]/10 px-1.5 py-0.5 rounded border border-[#E59500]/20">/</kbd>
+          <kbd className="font-mono text-[10px] text-[#CBB282] font-medium bg-[#CBB282]/10 px-1.5 py-0.5 rounded border border-[#CBB282]/20">/</kbd>
           <span>to ask</span>
         </div>
       </div>
